@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   borderColor="#000000"
+				   borderWeight="4"
+				   borderStyle="inset"
+				   cornerRadius="7"
+				   contentBackgroundColor="#FFFFFF"
+				   width="300"
+				   height="40" height.editing="300">
+	
+	<s:transitions>
+		<s:Transition fromState="*" toState="*">
+			<s:Resize duration="400" target="{this}"/>
+		</s:Transition>
+	</s:transitions>
+
+	<s:states>
+		<s:State name="viewing"/>
+		<s:State name="writing" stateGroups="editing"/>
+		<s:State name="posting" stateGroups="editing"/>
+	</s:states>
+	
+	<s:Group width="100%">
+		<s:Label text="Tweet Weasel"
+				 top="6" left="6"
+				 color="#333333"
+				 fontSize="24"
+				 fontFamily="Georgia"/>
+		<s:Button label.viewing="▲"
+				  label.editing="▼"
+				  click.viewing="currentState = 'writing'"
+				  click.editing="currentState = 'viewing'"
+				  width="40" height="32"
+				  right="0"
+				  chromeColor="#FFFFFF"/>	
+	</s:Group>
+	
+	<s:RichEditableText left="6" right="6" 
+						top="38" bottom="30"
+						paddingTop="6" paddingRight="6" paddingBottom="6" paddingLeft="6"
+						backgroundColor="#FEF1B5"
+						includeIn="editing"
+						enabled.posting="false"/>
+	
+	<s:Button label="TWEET"
+			  left="6" right="6" bottom="6"
+			  click="currentState = 'posting'"
+			  excludeFrom="viewing"
+			  enabled.posting="false"
+			  chromeColor="#FF6600"/>
+	
+</s:BorderContainer>
