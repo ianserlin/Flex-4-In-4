@@ -1,0 +1,44 @@
+<script type="syntaxhighlighter" class="brush: xml">
+  <![CDATA[
+  <?xml version="1.0" encoding="utf-8"?>
+  <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+  			   xmlns:s="library://ns.adobe.com/flex/spark" 
+  			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+  			   minWidth="955" minHeight="600">
+
+  	<fx:Script>
+  		<![CDATA[
+  			import spark.skins.spark.ButtonSkin;
+
+  			protected function switchButton_clickHandler(event:MouseEvent):void {
+  				fancyButton.setStyle( "skinClass", fancyButton.getStyle("skinClass") == MirrorButtonSkin ? spark.skins.spark.ButtonSkin : MirrorButtonSkin );
+  			}
+
+  		]]>
+  	</fx:Script>
+
+  	<fx:Style source="style.css"/>
+
+  	<s:layout>
+  		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"
+  						  gap="30"/>
+  	</s:layout>
+
+
+
+  	<s:Button id="fancyButton"
+  			  label="I am a fancy button!"
+  			  skinClass="MirrorButtonSkin"/>
+
+  	<s:Button id="switchButton"
+  			  label="Switch Skin"
+  			  skinClass="GlowingButtonSkin"
+  			  click="switchButton_clickHandler(event)"/>
+
+  	<s:Button id="simpleButton"
+  			  label="This is an almost chromeless button"
+  			  skinClass="SimpleButtonSkin"/>
+
+  </s:Application>
+  ]]>
+</script>

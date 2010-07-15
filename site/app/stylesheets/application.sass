@@ -1,0 +1,96 @@
+// CONSTANTS
+
+!text=  #323232
+!link=  #FF8000
+!gray=  #CCC
+
+!corner_radius= 7px
+
+// ELEMENTS
+
+html, body
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  
+body
+  font-size: 14px
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  color=  !text
+  background: #FFFFFF
+  
+a
+  color=  !link
+  text-decoration:  none
+a:hover
+  color=  !link
+  text-decoration:  underline
+a.no_hover:hover
+  text-decoration:  none
+
+// CLASSES
+
+.right
+  float:  right
+
+.clear
+  clear:  both
+
+.text_right
+  text-align: right
+
+.rounded_corners
+  -moz-border-radius= !corner_radius
+  -webkit-border-radius= !corner_radius
+
+.notice
+  color: #FFF
+  background: #666
+  padding: 30px
+  -moz-border-radius-topleft: 11px
+  -webkit-border-top-left-radius: 11px
+  -moz-border-radius-bottomright= !corner_radius
+  -webkit-border-bottom-right-radius= !corner_radius
+  .title
+    font-size: 20px
+    color: #CCC
+    padding-bottom: 6px
+    
+.syntaxhighlighter
+  clear: both
+
+// OBJECTS
+
+#container
+  margin: 0 auto
+  padding: 20px 10px
+  width:  680px
+  height: 100%
+  border-left: 1px solid #AAA
+
+#menu
+  position: absolute
+  width: 160px
+  left: 50%
+  margin: 0 0 0 -520px
+  font-size: 16px
+  padding: 20px 0 0 0
+  list-style: none
+
+#footer
+  font-size: 10px
+  width: 100%
+  padding: 20px 0
+
+#header
+  font-size: 24px
+  color=  !gray
+  font-family: "Palatino Linotype", Palatino, serif
+  font-variant: small-caps
+  margin-bottom: 20px
+
+#logo
+  font-size:  64px
+  line-height: 0.75em
+  margin-bottom: 20px

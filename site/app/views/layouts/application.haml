@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta
+    %title
+      Flex 4 in 4: Bite-size best practices
+    %link{ :type => 'text/css', :rel => 'stylesheet', :media => 'screen', :href => '/stylesheets/application.css' }
+    %link{ :type => 'text/css', :rel => 'stylesheet', :media => 'screen', :href => '/stylesheets/syntax_highlighter/shCoreFadeToGrey.css' }
+  %body
+    = partial 'base/menu'
+
+    #container
+      #header
+        bite-size best practices
+
+      = yield
+      
+      = partial 'base/footer'
+      .clear
+    
+    %script{ :type => 'text/javascript', :src => '/javascripts/jquery.js' }
+    %script{ :type => 'text/javascript', :src => '/javascripts/application.js' }
+    %script{ :type => 'text/javascript', :src => '/javascripts/syntax_highlighter/shCore.js' }
+    %script{ :type => 'text/javascript', :src => '/javascripts/syntax_highlighter/shBrushAS3.js' }
+    %script{ :type => 'text/javascript', :src => '/javascripts/syntax_highlighter/shBrushXml.js' }    

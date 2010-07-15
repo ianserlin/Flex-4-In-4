@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		alpha.disabled="0.5"
+		height="{labelDisplay.height + 2}">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("spark.components.Button")]
+	</fx:Metadata>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="disabled" />
+		<s:State name="down" />
+		<s:State name="over" />
+		<s:State name="up" />
+	</s:states>
+	
+	<!-- SkinParts
+	name=labelDisplay, type=spark.components.supportClasses.TextBase, required=false
+	-->
+	
+	<s:Label id="labelDisplay" top="0" top.down="2" textDecoration.up="none" textDecoration="underline">
+		<s:filters>
+			<s:DropShadowFilter alpha="0.5" excludeFrom="down"/>
+			<s:GlowFilter blurX="10" blurY="10" includeIn="down"/>
+		</s:filters>
+	</s:Label>
+</s:Skin>
