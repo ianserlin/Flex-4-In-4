@@ -3,6 +3,7 @@
 !text=  #323232
 !link=  #FF8000
 !gray=  #CCC
+!red=   #C00
 
 !corner_radius= 7px
 
@@ -29,13 +30,23 @@ a:hover
 a.no_hover:hover
   text-decoration:  none
 
+br
+  padding: 0
+  margin: 0
+
 // CLASSES
+
+.small
+  font-size: 12px
 
 .right
   float:  right
 
 .clear
   clear:  both
+
+.block
+  display: block
 
 .text_right
   text-align: right
@@ -60,16 +71,38 @@ a.no_hover:hover
 .syntaxhighlighter
   clear: both
 
+.menu
+  position: absolute
+  left: 50%
+  margin-left: 350px
+  border-left: 1px solid
+  border-left-color= !gray
+  width: 170px
+  font-size: 12px
+  padding-bottom: 10px
+  ul
+    margin: 4px 0 0 6px
+    padding: 0
+    list-style: none
+    li
+      padding-top: 4px
+  .title
+    color: #FFF
+    background-color= !gray
+    font-size: 13px
+    padding: 2px 6px
+
 // OBJECTS
 
 #container
+  position: relative
   margin: 0 auto
   padding: 20px 10px
   width:  680px
   height: 100%
   border-left: 1px solid #AAA
 
-#menu
+#nav_menu
   position: absolute
   width: 160px
   left: 50%
@@ -94,3 +127,10 @@ a.no_hover:hover
   font-size:  64px
   line-height: 0.75em
   margin-bottom: 20px
+
+#status
+  position: absolute
+  top: 0
+  right: 0
+  font-size: 10px
+  color= !red
