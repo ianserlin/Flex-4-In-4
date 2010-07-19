@@ -1,3 +1,5 @@
+<script type="syntaxhighlighter" class="brush: xml"><![CDATA[
+
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
@@ -5,9 +7,8 @@
 			   minWidth="955" minHeight="600" xmlns:local="*">
 
 	<fx:Script>
-		<![CDATA[
+		&lt;![CDATA[
 			import flash.events.MouseEvent;
-			
 			import spark.effects.Rotate3D;
 
 			protected function someButton_clickHandler(event:MouseEvent):void {
@@ -20,8 +21,7 @@
 				rotate3D.angleZTo				= 360;
 				rotate3D.play();
 			}
-
-		]]>
+		]]&gt;
 	</fx:Script>
 
 	<s:Button id="someButton"
@@ -30,3 +30,6 @@
 			  click="someButton_clickHandler(event)"/>
 	
 </s:Application>
+
+
+]]></script>

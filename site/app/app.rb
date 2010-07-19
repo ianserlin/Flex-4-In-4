@@ -3,6 +3,7 @@ class Flex4in4 < Padrino::Application
   register Padrino::Helpers
   register SassInitializer
 
+  enable :auto_locale
 
   ##
   # Application configuration options

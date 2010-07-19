@@ -1,38 +1,250 @@
-%h2
-  What is Adobe Flex?
-%h2
-  What is Adobe Flash Builder/Flex Builder?
-%h2
-  What is MXML?
-%h2
-  What is ActionScript 3 (AS3)?
-%h2
-  What is a SWF?
-%h2
-  What is a SWC?
-%h2
-  What is a Flex Project?
-%h2
-  What is a Flex Library Project?
-%h2
-  What is an Application?
-%h2
-  What is a layout?
-%h2
-  What is a component?
-%h2
-  What is a container?
-%h2
-  What is a skin?
-%h2
-  What does CSS mean in regards to Flex?
-%h2
-  What is a State?
-%h2
-  What is a Transition?
-%h2
-  What is an effect?
-%h2
-  What is an event/event handler?
-%h2
-  Bonus: What is the elastic racetrack?  
+.menu
+  .title
+    Know Your Stuff
+    /
+      = I18n.t("padawan_menu_title")
+  %ul
+    %li
+      %a{ :href => "#flex" }
+        What is Adobe Flex?
+    %li
+      %a{ :href => "#flashbuilder" }
+        What is Adobe Flash Builder/Flex Builder?
+    %li
+      %a{ :href => "#mxml" }
+        What is MXML?
+    %li
+      %a{ :href => "#as3" }
+        What is ActionScript 3 (AS3)?
+    %li
+      %a{ :href => "#swf" }
+        What is a SWF?
+    %li
+      %a{ :href => "#swc" }
+        What is a SWC?
+    %li
+      %a{ :href => "#project" }
+        What is a Flex Project?
+    %li
+      %a{ :href => "#libraryproject" }
+        What is a Flex Library Project?
+    %li
+      %a{ :href => "#app" }
+        What is an Application?
+    %li
+      %a{ :href => "#layout" }
+        What is a layout?
+    %li
+      %a{ :href => "#component" }
+        What is a component?
+    %li
+      %a{ :href => "#container" }
+        What is a container?
+    %li
+      %a{ :href => "#skin" }
+        What is a skin?
+    %li
+      %a{ :href => "#css" }
+        What does CSS mean in regards to Flex?
+    %li
+      %a{ :href => "#state" }
+        What is a State?
+    %li
+      %a{ :href => "#transition" }
+        What is a Transition?
+    %li
+      %a{ :href => "#effect" }
+        What is an effect?
+    %li
+      %a{ :href => "#event" }
+        What is an event/event handler?
+    %li
+      %a{ :href => "#binding" }
+        What is a binding?
+    %li
+      %a{ :href => "#racetrack" }
+        Bonus: What is the elastic racetrack?
+
+.notice
+  .title
+    Padawan Series
+  %p
+    The information here is designed to take you from ground zero to speaking the lingo.
+    These are the foundational concepts that all the other series build on and wrapping your
+    mind around the following ideas first will allow you to go so much faster later on.
+  %p
+    Train well and come to know the Flex.
+
+%h3
+  %a{ :name => "flex" }
+    What is Adobe Flex?
+%h3
+  %a{ :name => "flashbuilder" }
+    What is Adobe Flash Builder/Flex Builder?
+%h3
+  %a{ :name => "mxml" }
+    What is MXML?
+%h3
+  %a{ :name => "as3" }
+    What is ActionScript 3 (AS3)?
+%h3
+  %a{ :name => "swf" }
+    What is a SWF?
+%h3
+  %a{ :name => "swc" }
+    What is a SWC?
+%h3
+  %a{ :name => "project" }
+    What is a Flex Project?
+%h3
+  %a{ :name => "libraryproject" }
+    What is a Flex Library Project?
+%h3
+  %a{ :name => "app" }
+    What is an Application?
+%h3
+  %a{ :name => "layout" }
+    What is a layout?
+%h3
+  %a{ :name => "component" }
+    What is a component?
+%h3
+  %a{ :name => "container" }
+    What is a container?
+%h3
+  %a{ :name => "skin" }
+    What is a skin?
+%h3
+  %a{ :name => "css" }
+    What does CSS mean in regards to Flex?
+%h3
+  %a{ :name => "state" }
+    What is a State?
+.definition
+  %p
+    Flex States are kind of similar to a CSS class, but way more powerful. Whereas in a CSS class you can change things like colors, font sizes, etc., 
+    using a Flex State you can change 
+    %em
+      any 
+    property on a component, which functions get called for events like click 
+    and even which parts of the component are currently visible or not simply by switching the component's state.
+  %p
+    For instance, let's say you're making a toolbar component. It might have a "normal" state where it's size is 300px by 40px, but in the "expanded"
+    state, its size should increase to maybe 350px by 400px. You can easily achieve this using just one component by specifying the two states in the
+    following way:
+  %p
+    = partial 'padawan/state_example'
+  %p
+    Note the &lt;s:states/&gt; block where the two States for the toolbar are defined, the use of the [property].[state] syntax on the properties of the BorderContainer
+    and the includeIn/exludeFrom directives on the two buttons. Also note that the default state of the component is the first one you define.
+    If you get this, you now know 95% of what you need to know about Flex States.
+  
+%h3
+  %a{ :name => "transition" }
+    What is a Transition?
+.definition
+  %p
+    Transitions and States go hand in hand. While a State defines how a component looks and behaves at any given point in time, the Transition
+    specifies how a component gets from one state to another and can add a level of finesse to your application.
+  %p
+    For example, in the previous section we designed a "toolbar" that had two states: expanded and collapsed. When we clicked on the toolbar
+    it toggled between its two states by simply redrawing itself large or small. Such an instantaneous change can be jolting, but we can do
+    better by giving the user a visual cue as to what's actually going on. If the toolbar were to 
+    %em
+      gradually 
+    change its size from small to large, suddenly it becomes ridiculously obvious how the toolbar works.
+  %p
+    = partial 'padawan/transition_example'
+  %p
+    Notice the &lt;s:Transitions/&gt; block. Here we define what should happen when changing from any one state to another. We can also define
+    what should happen between all states by writing
+    %code
+      fromState="*" toState="*"
+    instead of   
+    %code
+      fromState="collapsed" toState="expanded"
+    and eliminating the second transition altogether. Inside the transition we can define any set of effects we want including 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/mx/effects/Sequence.html?allClasses=1", :title => "Flex Sequence Composite Effect" }
+      effects that should happen in order
+    and
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/mx/effects/Parallel.html?allClasses=1", :title => "Flex Parallel Composite Effect" }
+      effect that should happen in parallel
+    and injecting
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/mx/effects/Pause.html?allClasses=1", :title => "Flex Pause Effect" }
+      pauses between effects,
+    etc.
+  %p
+    Speaking of effects...
+%h3
+  %a{ :name => "effect" }
+    What is an effect?
+.definition
+  %p
+    A Flex Effect is a special type of non-visual object that knows how to animate a certain set of properties on a separate visual object. There
+    are a variety of built-in effects for standard things like 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/effects/Fade.html?allClasses=1", :title => "Spark Fade Effect" }
+      fades,
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/effects/Rotate3D.html?allClasses=1", :title => "Spark Rotate3D Effect" }
+      3D rotations
+    and
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/effects/Wipe.html?allClasses=1", :title => "Spark Wipe Effect" }
+      wipes,
+    but the framework also gives you lower level control to create dazzling new effects to your heart's desire via classes like
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/effects/Animate.html?allClasses=1", :title => "Spark Animate Effect" }
+      spark.effects.Animate
+    and
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/effects/AnimateColor.html?allClasses=1", :title => "Spark AnimateColor Effect" }
+      spark.effects.AnimateColor.
+  %p
+    There are (almost too) many ways to use and trigger effects, here are the most common in ActionScript 3:
+    = partial 'padawan/effect_example_actionscript'
+    and in MXML:
+    = partial 'padawan/effect_example_mxml'
+  %p
+    The key parts of any effect definition are the 
+    %code
+      target/targets
+    ,
+    %code
+      [property]From/[property]To
+    and
+    %code
+      duration
+    properties because these specify the Who, What and How Long of the effect. The 
+    %code
+      easer
+    property modifies the How, and if you can master that your 99% of the way to becoming an effects ninja. 
+  %p
+    %strong
+      The More You Know: 
+  %p  
+    Keep in mind that it's easy to over use  effects and a little animation goes a long way: pay particular attention to the durations when designing. 
+    Also, stay away from anything in the mx.effects.* package if you possibly can because these were superseded in Flex 4 by the spark.effects.* 
+    package where lives all your animation treats.
+    
+%h3
+  %a{ :name => "event" }
+    What is an event/event handler?
+%h3
+  %a{ :name => "binding" }
+    What is a binding?
+%h3
+  %a{ :name => "racetrack" }
+    Bonus: What is the elastic racetrack?  
+.definition
+  %p
+    Flash Player executes your code in cycles that are divided into two main parts: drawing and calculating. Your goal as a Flex developer is
+    not only to write code that results in faster cycles overall, but also to write code that achieves a balance between the time the Flash Player 
+    spends calculating and rendering. So, if you're drawing a chinaman walking across the screen 100 times per second, but the screen can only refresh
+    at 60 times per second, then you are wasting time that could be spent doing other things by drawing the chinaman 40 extra times per second.
+  %p
+    The best way to ensure that your racetrack stays balanced is to take advantage of the hooks that the Flex framework gives you. Overriding methods like 
+    commitProperties(), measure() and updateDisplayList() will let you customize your components as much as you want, but still allow the Flex framework
+    to decide when is the optimal time to perform each of these duties. Duties. haha
+  %p
+    Check out
+    %a{ :href => "http://www.craftymind.com/2008/04/18/updated-elastic-racetrack-for-flash-9-and-avm2/", :title => "Updated ‘Elastic Racetrack’ for Flash 9 and AVM2"}
+      this article
+    for more details.
+%p
+  Did I miss something? Leave a comment with your concept and explanation and if it makes sense I'll pull it in like Obi-wan.

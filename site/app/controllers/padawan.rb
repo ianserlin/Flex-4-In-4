@@ -4,4 +4,8 @@ Flex4in4.controllers :padawan do
     render 'padawan/index'
   end
   
+  get ':lang' do
+    render 'padawan/index'
+  end
+  
 end

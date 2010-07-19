@@ -1,0 +1,52 @@
+<script type="syntaxhighlighter" class="brush: xml"><![CDATA[
+
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" 
+				   width="300" height="40"
+				   width.expanded="350" height.expanded="400"
+				   cornerRadius="7" backgroundColor="#CCCCCC"
+				   click="this_clickHandler(event)">
+
+	<fx:Script>
+			&lt;![CDATA[
+			/**
+			 * Toggles the state of this component from normal to expanded when it's clicked on.
+			 */
+			protected function this_clickHandler(event:MouseEvent):void {
+				this.currentState = this.currentState == 'collapsed' ? 'expanded' : 'collapsed';
+			}
+			]]&gt;
+	</fx:Script>
+
+	<s:states>
+		<s:State name="collapsed"/>
+		<s:State name="expanded"/>
+	</s:states>
+	
+	<s:transitions>
+		<s:Transition fromState="collapsed" toState="expanded">
+			<s:Resize target="{this}" duration="750"/>
+		</s:Transition>
+		<s:Transition fromState="expanded" toState="collapsed">
+			<s:Resize target="{this}" duration="250"/>
+		</s:Transition>
+	</s:transitions>
+	
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	
+	<s:Label text="I'm a tiny."
+			 text.expanded="I'M A GIANT!"/>
+	
+	<s:Button label="Not in expanded"
+			  excludeFrom="expanded"/>
+
+	<s:Button label="Only in collapsed"
+			  includeIn="collapsed"/>
+	
+</s:BorderContainer>
+
+]]></script>
