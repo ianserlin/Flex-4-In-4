@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="400" height="300">
+
+	<fx:Script>
+		<![CDATA[
+			/**
+			 * Handles the user clicking on the imagination button.
+			 * @param e The click event that triggered the listener
+			 */
+			protected function activateImaginationButton_clickHandler(event:MouseEvent):void {
+				trace( "The force is strong with George Lucas, he's rich." );
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Button id="activateImaginationButton"
+			  label="Activate Light Saber"
+			  click="activateImaginationButton_clickHandler(event)"
+			  />
+</s:Group>

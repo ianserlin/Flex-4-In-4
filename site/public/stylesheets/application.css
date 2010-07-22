@@ -32,6 +32,9 @@ h3 {
   border-bottom: 1px solid;
   border-bottom-color: #eeeeee; }
 
+.gray {
+  color: #cccccc; }
+
 .small {
   font-size: 12px; }
 

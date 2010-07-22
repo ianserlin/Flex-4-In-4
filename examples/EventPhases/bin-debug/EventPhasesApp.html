@@ -23,7 +23,7 @@
         <style type="text/css" media="screen"> 
 			html, body	{ height:100%; }
 			body { margin:0; padding:0; overflow:auto; text-align:center; 
-			       background-color: #ffffff; }   
+			       background-color: #eeeeee; }   
 			object:focus { outline:none; }
 			#flashContent { display:none; }
         </style>
@@ -43,15 +43,15 @@
             var flashvars = {};
             var params = {};
             params.quality = "high";
-            params.bgcolor = "#ffffff";
+            params.bgcolor = "#eeeeee";
             params.allowscriptaccess = "sameDomain";
             params.allowfullscreen = "true";
             var attributes = {};
-            attributes.id = "SkinsVsComponents";
-            attributes.name = "SkinsVsComponents";
+            attributes.id = "EventPhasesApp";
+            attributes.name = "EventPhasesApp";
             attributes.align = "middle";
             swfobject.embedSWF(
-                "SkinsVsComponents.swf", "flashContent", 
+                "EventPhasesApp.swf", "flashContent", 
                 "500", "300", 
                 swfVersionStr, xiSwfUrlStr, 
                 flashvars, params, attributes);
@@ -77,16 +77,16 @@
         </div>
 	   	
        	<noscript>
-            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="300" id="SkinsVsComponents">
-                <param name="movie" value="SkinsVsComponents.swf" />
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="300" id="EventPhasesApp">
+                <param name="movie" value="EventPhasesApp.swf" />
                 <param name="quality" value="high" />
-                <param name="bgcolor" value="#ffffff" />
+                <param name="bgcolor" value="#eeeeee" />
                 <param name="allowScriptAccess" value="sameDomain" />
                 <param name="allowFullScreen" value="true" />
                 <!--[if !IE]>-->
-                <object type="application/x-shockwave-flash" data="SkinsVsComponents.swf" width="500" height="300">
+                <object type="application/x-shockwave-flash" data="EventPhasesApp.swf" width="500" height="300">
                     <param name="quality" value="high" />
-                    <param name="bgcolor" value="#ffffff" />
+                    <param name="bgcolor" value="#eeeeee" />
                     <param name="allowScriptAccess" value="sameDomain" />
                     <param name="allowFullScreen" value="true" />
                 <!--<![endif]-->

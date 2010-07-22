@@ -62,6 +62,9 @@
       %a{ :href => "#binding" }
         What is a binding?
     %li
+      %a{ :href => "#trace" }
+        What is trace()?
+    %li
       %a{ :href => "#racetrack" }
         Bonus: What is the elastic racetrack?
 
@@ -70,10 +73,10 @@
     Padawan Series
   %p
     The information here is designed to take you from ground zero to speaking the lingo.
-    These are the foundational concepts that all the other series build on and wrapping your
+    On this one page are the foundational concepts that all the other series build on and wrapping your
     mind around the following ideas first will allow you to go so much faster later on.
   %p
-    Train well and come to know the Flex.
+    Train well and become one with the Flex.
 
 %h3
   %a{ :name => "flex" }
@@ -87,6 +90,9 @@
 %h3
   %a{ :name => "as3" }
     What is ActionScript 3 (AS3)?
+.definition
+  %p
+    Strongly-typed, object-oriented mix between Java and JavaScript with its own set of built-in classes and utilities.
 %h3
   %a{ :name => "swf" }
     What is a SWF?
@@ -210,10 +216,10 @@
     and
     %code
       duration
-    properties because these specify the Who, What and How Long of the effect. The 
+    properties because these specify the Who, What and How Long of the effect. Additionally, you can use the 
     %code
       easer
-    property modifies the How, and if you can master that your 99% of the way to becoming an effects ninja. 
+    property to modify the How (make the effect bouncy, etc.), and if you can master that your 99% of the way to becoming an effects Jedi. 
   %p
     %strong
       The More You Know: 
@@ -225,9 +231,234 @@
 %h3
   %a{ :name => "event" }
     What is an event/event handler?
+.definition
+  %p
+    Ok, this one is fairly intuitive and probably means exactly what you think it does youngling... except it's a little more complicated than that.
+  %p
+    An event in AS3/Flex is an object that represents something which happened, whether it's the application loading or a user typing into
+    a text input. There are different classes for different events which contain information specific to that particular type of event and the
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/", :title => "AS3/Flex API documentation"}
+      API docs
+    do a great job of letting you know which events are "dispatched" or come from the different classes you want to work with.
+  %p
+    %em
+      All 
+    events in AS3/Flex extend from the 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1", :title => "Flash Event base class" }
+      flash.events.Event 
+    base class and so you can always be guaranteed to have access to a few standard properties, the most important of which are:
+    %ul
+      %li
+        %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1#type", :title => "Flash Event type property"}
+          \.type
+        A String that identifies what action this event represents, like "click" or "uploadComplete". These types are typically constants defined in the
+        event subclass you are interested in.
+      %li
+        %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1#target", :title => "Flash Event target property"}
+          \.target
+        The object that originally dispatched the event, like a button or a timer
+      %li
+        %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1#currentTarget", :title => "Flash Event currentTarget property"}
+          \.currentTarget
+        The object that is currently handling the event, i.e. the object that you registered your event listener on. What is an event listener?
+  %p
+    Good question. But first, you should know about event phases and the Display List. Pay attention because the evil forces of darkness 
+    (i.e. interviewers) have been known to destroy many a padawan's hopes and dreams with questions like this.
+  %p
+    %strong
+      Display List
+  %p
+    All visual objects ( e.g. 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1#currentTarget", :title => "Flex 4 Group container" }
+      Groups,
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/RichEditableText.html?allClasses=1", :title => "Flex 4 RichEditableText component" }
+      RichEditableTexts
+    ) spend most of their time as part of a tree of other visual objects that in Flash is called the Display List. At the root of the Display List is
+    the
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/display/Stage.html?allClasses=1", :title => "The Flash Stage" }
+      Stage.
+    Your Flex
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/Application.html?allClasses=1", :title => "Spark Application documentation" }
+      Application
+    class is the first 
+    %em
+      child 
+    of the Stage, and the Stage is your Application's 
+    %em
+      parent.
+    The rest of your visual objects flow down and fill out the tree from here.
+  %p
+    Flex actually has at least two "display lists", one for normal visual objects and one for pop-ups created by the
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/mx/managers/PopUpManager.html?allClasses=1", :title => "Flex Pop-up Manager"}
+      PopUpManager.
+    You'll normally only deal with the former, though, because as you design your application and add and remove visual elements, they are added and removed to
+    this first display list, have parents and if they are containers may have children themselves.
+  %p
+    %strong
+      Event Phases
+  %p
+    There are three, and they start at the root of the tree/Display List.
+    %ul
+      %li
+        %em
+          capture
+        In this phase the event object is traveling down from the Stage through your Application to the target (you remember the event target right?),
+        for example, a button the user clicked on.
+      %li
+        %em
+          at-target
+        In this phase the event object has actually arrived at the target and the target is given a chance to process the event.
+      %li
+        %em
+          bubbling
+        Arguably the most interesting phase, the event starts traveling back up the Display List from the target all the way
+        back to the Stage. This is the point at which most event listeners get triggered.
+    There are more idiosyncrasies to Flash events, like 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1#preventDefault()", :title => "Canceling an event: preventDefault()" }
+      cancelling
+    and
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1#stopPropagation()", :title => "Stopping propogation of an event" }
+      stopping propogation
+    and you can actually check the current phase of an event via the
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html#eventPhase", :title => "Event eventPhase property" }
+      \.eventPhase
+    property. It is even possible to dispatch and catch events outside of the Display List, but if you've understood this so far, you're doing well.
+  %p
+    %em
+      Check out 
+      %a{ :href => "http://www.macrolearn.com/devnet/flash/quickstart/display_list_programming_as3/", :title => "Display List Programming" }
+        this article 
+      for more information on the Flash Display List. And 
+      %a{ :href => "http://www.adobe.com/devnet/actionscript/articles/event_handling_as3_03.html", :title => "Flash Event Phases" }
+        this article
+      for more information on event phases.
+  %p
+    %strong
+      So, finally, how does this relate to event listeners?
+  %p
+    An event listener is a function that takes an event object as its only parameter and is executed when the event it's listening for arrives 
+    at the object it cares about. Remember that an event has a
+    %code
+      target
+    and a
+    %code
+      currentTarget
+    property? While a user may be clicking on a button (and thus the button becomes the event's target), you can actually register an event listener
+    anywhere above that button in the Display List and your listener will be called during that click event's bubbling phase. 
+  %p
+    Let's say you put your
+    button inside of a Group and register your "click" event listener on the Group. When your listener is executed the event's target will be
+    the button 
+    %em
+      but 
+    the currentTarget will be the Group, because the Group is now the object that is currently processing the event.
+  %p
+    %em
+      *Phew*
+    The reason you should know this is so you don't get confused and use target where you should use currentTarget and vice versa in your listeners.
+    In Flex, when dealing with things like 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/List.html?allClasses=1", :title => "Flex 4 List Component" }
+      Lists
+    especially, but really any sort of container this is an important distinction to keep in mind.
+  %p
+    %strong
+      Examples!
+  %p
+    Adding an event listener in ActionScript 3 (line 18 is the key here):
+    = partial 'padawan/event_listener_example_as3'
+  %p
+    Wiring an event listener in MXML (it's on line 21):
+    = partial 'padawan/event_listener_example_mxml'
+  %p
+    Bonus! Event phases in action:
+    = partial 'padawan/event_phases_example'
+    
 %h3
   %a{ :name => "binding" }
     What is a binding?
+.definition
+  %p
+    Flex bindings are a simple yet powerful way to link the value of two variables together. 
+  %p
+    Let's say you're keeping track of the score of
+    the current person who is playing your awesome Flex game somewhere in a variable. If you wanted to display this score in your UI via a 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/Label.html?allClasses=1", :title => "Flex 4 Label component" }
+      Label
+    you'd need to set the
+    %code
+      \.text
+    property on the Label to the score, but you don't necessarily want that Label's 
+    %code
+      \.text
+    property to be the only place you store the score and you'd like the Label to automatically update itself every time the score changes. 
+    You can do this very cleanly and succinctly using Flex bindings.
+  %p
+    When you use the binding syntax in MXML, the Flex compiler will automatically generate and inject code that will propagate the value from the
+    binding 
+    %em
+      source 
+    to the binding
+    %em
+      destination
+    (in this case your variable to the Label's text property) into your Application when you compile it to a SWF. This does add a little size
+    to your application and a large amount of bindings can have performance implications, but generally speaking this is the best way
+    to set up a binding because in that generated code are some checks and balances for handling edge cases that you'd have to manually
+    write otherwise.
+  %p
+    Here's a one-way binding in MXML:
+    = partial 'padawan/binding_example_one_way_mxml'
+  %p
+    In Flex 4, you can also easily create two-way bindings in MXML:
+    = partial 'padawan/binding_example_two_way_mxml'
+  %p
+    one way as3 example
+  %p
+    avoiding warnings with the [Bindable] tag, can bind props/gttrs+sttrs or gttrs with a custom [Bindable("eventName")] property
+    Yes, bindings are based on events that trigger event handlers which actually update the values. For any built-in Flex components
+    the API Docs will tell you what event triggers a binding for a given bindable property or method although generally speaking
+    you don't need to care.
+%h3
+  %a{ :name => "trace" }
+    What is trace()?
+.definition
+  %p
+    %code
+      trace() 
+    is a top-level utility function that lets you output strings to the console (typically inside your IDE) when running the debug version of your application.
+  %p
+    There are much more efficient ways to debug your application such as using the visual debugger built into  
+    %a{ :href => "#flashbuilder", :title => "Adobe Flash Builder" }
+      Flash Builder
+    or using
+    %a{ :href => "http://code.google.com/p/flash-thunderbolt/wiki/ThunderBoltAS3", :title => "Logging for Firebug/Firefox" }
+      ThunderBoltAS3
+    to output to the log in Firebug/Firefox, but it's the equivalent to 
+    %code
+      System.out.println 
+    in Java or 
+    %code
+      puts
+    in Ruby and so is a simple yet essential tool in your Jedi belt.
+  %p
+    It works just like you think:
+    = partial 'padawan/trace_example'
+  %p
+    Note that all objects have a built-in 
+    %code
+      toString()
+    method (which you override without the keyword
+    %code
+      override
+    in your custom classes because it's a vestige of prototype-based inheritance) and is called on the target object when you pass it to 
+    %code
+      trace()
+    \. A Class's default 
+    %code
+      toString() 
+    sometimes gives you really useful information and sometimes completely sucks, but you can always try it because you can always pass anything directly into the 
+    %code
+      trace()
+    function.
 %h3
   %a{ :name => "racetrack" }
     Bonus: What is the elastic racetrack?  

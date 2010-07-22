@@ -2,31 +2,51 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
-			   minWidth="955" minHeight="600" xmlns:local="*">
+			   width="500" height="300" xmlns:local="*"
+			   applicationComplete="application_applicationCompleteHandler(event)">
 
 	<fx:Script>
 		<![CDATA[
-			import flash.events.MouseEvent;
 			
-			import spark.effects.Rotate3D;
-
-			protected function someButton_clickHandler(event:MouseEvent):void {
-				var rotate3D:Rotate3D 			= new Rotate3D( event.target );
-				rotate3D.duration 				= 2000; //ms
-				rotate3D.autoCenterProjection 	= true;
-				rotate3D.angleYFrom 			= 0;
-				rotate3D.angleYTo 				= 360;
-				rotate3D.angleZFrom				= 0;
-				rotate3D.angleZTo				= 360;
-				rotate3D.play();
+			import mx.events.FlexEvent;
+			
+			/**
+			 * When the application has finished loading, wire up all the click handlers.
+			 */
+			protected function application_applicationCompleteHandler(event:FlexEvent):void {
+				// trace out a single line of text
+				trace( "this all shows up on one line, with a line break at the end" );
+				
+				var a:String 	= "Flex";
+				var b:int 		=	4;
+				var c:String 	= "in";
+				var d:String	= "4";
+				
+				// trace out a few things concatenated onto one line with spaces in-between
+				trace( a, b, c, d );
+				
+				// trace out a random object
+				trace( this );
 			}
 
 		]]>
 	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:layout>
+	
+	<s:Group id="extraneousGroup"
+			 width="100%">
+		
+		<s:Button id="magicalButton"
+				  horizontalCenter="0" verticalCenter="0"
+				  label="Click me FTW!"/>
+	</s:Group>
 
-	<s:Button id="someButton"
-			  horizontalCenter="0" verticalCenter="0"
-			  label="You spin me right round..."
-			  click="someButton_clickHandler(event)"/>
+	<s:TextArea id="output"
+				width="100%"
+				minHeight="250"
+				color="#2A00FF"/>	
 	
 </s:Application>

@@ -1,11 +1,11 @@
 // CONSTANTS
 
-!text=  #323232
-!link=  #FF8000
-!gray=  #CCC
-!red=   #C00
+$text=  #323232
+$link=  #FF8000
+$gray=  #CCC
+$red=   #C00
 
-!corner_radius= 7px
+$corner_radius= 7px
 
 // ELEMENTS
 
@@ -18,14 +18,14 @@ html, body
 body
   font-size: 14px
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-  color=  !text
+  color=  $text
   background: #FFFFFF
   
 a
-  color=  !link
+  color=  $link
   text-decoration:  none
 a:hover
-  color=  !link
+  color=  $link
   text-decoration:  underline
 a.no_hover:hover
   text-decoration:  none
@@ -43,6 +43,9 @@ h3
   
 // CLASSES
 
+.gray
+  color=  $gray
+
 .small
   font-size: 12px
 
@@ -59,8 +62,8 @@ h3
   text-align: right
 
 .rounded_corners
-  -moz-border-radius= !corner_radius
-  -webkit-border-radius= !corner_radius
+  -moz-border-radius= $corner_radius
+  -webkit-border-radius= $corner_radius
 
 .notice
   color: #FFF
@@ -68,8 +71,8 @@ h3
   padding: 30px
   -moz-border-radius-topleft: 11px
   -webkit-border-top-left-radius: 11px
-  -moz-border-radius-bottomright= !corner_radius
-  -webkit-border-bottom-right-radius= !corner_radius
+  -moz-border-radius-bottomright= $corner_radius
+  -webkit-border-bottom-right-radius= $corner_radius
   .title
     font-size: 20px
     color: #CCC
@@ -83,7 +86,7 @@ h3
   left: 50%
   margin-left: 350px
   border-left: 1px solid
-  border-left-color= !gray
+  border-left-color= $gray
   width: 170px
   font-size: 12px
   padding-bottom: 10px
@@ -95,7 +98,7 @@ h3
       padding-top: 4px
   .title
     color: #FFF
-    background-color= !gray
+    background-color= $gray
     font-size: 13px
     padding: 2px 6px
 
@@ -104,8 +107,8 @@ h3
   border: 1px solid #CCC
   padding: 10px
   background: #EEE
-  -moz-border-radius= !corner_radius
-  -webkit-border-radius= !corner_radius
+  -moz-border-radius= $corner_radius
+  -webkit-border-radius= $corner_radius
   line-height: 1.5em
   margin-bottom: 50px
 
@@ -134,7 +137,7 @@ h3
 
 #header
   font-size: 24px
-  color=  !gray
+  color=  $gray
   font-family: "Palatino Linotype", Palatino, serif
   font-variant: small-caps
   margin-bottom: 20px
@@ -149,4 +152,4 @@ h3
   top: 0
   right: 0
   font-size: 10px
-  color= !red
+  color= $red

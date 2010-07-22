@@ -1,0 +1,130 @@
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="EventPhasesApp">
+    <param name="movie" value="/swfs/EventPhasesApp.swf" />
+    <param name="quality" value="high" />
+    <param name="bgcolor" value="#eeeeee" />
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name="allowFullScreen" value="false" />
+    <!--[if !IE]>-->
+    <object type="application/x-shockwave-flash" data="/swfs/EventPhasesApp.swf" width="650" height="300">
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#eeeeee" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="false" />
+    <!--<![endif]-->
+    <!--[if gte IE 6]>-->
+    	<p> 
+    		Either scripts and active content are not permitted to run or Adobe Flash Player version
+    		10.0.0 or greater is not installed.
+    	</p>
+    <!--<![endif]-->
+        <a href="http://www.adobe.com/go/getflashplayer">
+            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+        </a>
+    <!--[if !IE]>-->
+    </object>
+    <!--<![endif]-->
+</object>
+
+<p>Here's the source:</p>
+
+<script type="syntaxhighlighter" class="brush: xml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   width="500" height="300" xmlns:local="*"
+			   applicationComplete="application_applicationCompleteHandler(event)">
+	
+	<fx:Script>
+		&lt;![CDATA[
+			import flash.events.MouseEvent;
+			
+			import mx.events.FlexEvent;
+			
+			/**
+			 * Helper function for printing out the details of the event we care about.
+			 */
+			protected function outputEvent( event:MouseEvent ):void {
+				if( event.target == magicalButton ){
+					var phase:String = "";
+					switch( event.eventPhase ){
+						case EventPhase.CAPTURING_PHASE:
+							phase = "capturing";
+							break;
+						case EventPhase.AT_TARGET:
+							phase = "at-target";
+							break;
+						case EventPhase.BUBBLING_PHASE:
+							phase = "bubbling";
+							break;
+					}
+					output.text += "Event[type='" + event.type + "' phase='" + phase + "' target='" + event.target.id + "' currentTarget='" + event.currentTarget.id + "']\n\n";
+				}
+			}
+			
+			/**
+			 * When the application has finished loading, wire up all the click handlers.
+			 */
+			protected function application_applicationCompleteHandler(event:FlexEvent):void {
+				// wire up the capture phase mouse click on the application
+				// we do this by setting the "useCapture" parameter to true
+				this.addEventListener( MouseEvent.CLICK, application_click, true );
+				// wire up the bubbling phase mouse click on the application
+				this.addEventListener( MouseEvent.CLICK, application_click );
+				
+				// wire up the capture phase mouse click on the extraneous group
+				extraneousGroup.addEventListener( MouseEvent.CLICK, extraneousGroup_click, true );
+				// wire up the bubbling phase mouse click on the extraneous group
+				extraneousGroup.addEventListener( MouseEvent.CLICK, extraneousGroup_click );
+				
+				// wire up the capture phase mouse click on the magical button
+				// NOTE: this really won't have any effect since the event will be in the at-target phase
+				// when it's at the button
+				magicalButton.addEventListener( MouseEvent.CLICK, magicalButton_click, true );
+				// wire up the bubbling phase mouse click on the magical button
+				magicalButton.addEventListener( MouseEvent.CLICK, magicalButton_click );
+			}
+			
+			/**
+			 * Output the current state of the mouse event when it's being handled by the app.
+			 */
+			protected function application_click(event:MouseEvent):void {
+				outputEvent( event );
+			}
+			
+			/**
+			 * Output the current state of the mouse event when it's being handled by the group.
+			 */
+			protected function extraneousGroup_click(event:MouseEvent):void {
+				outputEvent( event );
+			}
+			
+			/**
+			 * Output the current state of the mouse event when it's being handled by the button.
+			 */
+			protected function magicalButton_click(event:MouseEvent):void {
+				outputEvent( event );
+			}
+		]]&gt;
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:layout>
+	
+	<s:Group id="extraneousGroup"
+			 width="100%">
+		
+		<s:Button id="magicalButton"
+				  horizontalCenter="0" verticalCenter="0"
+				  label="Click me FTW!"/>
+	</s:Group>
+	
+	<s:TextArea id="output"
+				width="100%"
+				minHeight="250"
+				color="#2A00FF"
+				fontSize="12"/>	
+	
+</s:Application>
+</script>
