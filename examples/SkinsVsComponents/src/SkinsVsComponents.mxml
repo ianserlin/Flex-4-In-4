@@ -25,8 +25,7 @@
 				// trace out a few things concatenated onto one line with spaces in-between
 				trace( a, b, c, d );
 				
-				// trace out a random object
-				trace( this );
+				ma
 			}
 
 		]]>
