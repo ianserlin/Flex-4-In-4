@@ -405,18 +405,77 @@
     to set up a binding because in that generated code are some checks and balances for handling edge cases that you'd have to manually
     write otherwise.
   %p
-    Here's a one-way binding in MXML:
+    Here's a one-way binding in MXML using the {} syntax:
     = partial 'padawan/binding_example_one_way_mxml'
   %p
-    In Flex 4, you can also easily create two-way bindings in MXML:
+    In Flex 4, you can also easily create two-way bindings in MXML using the @{} syntax:
     = partial 'padawan/binding_example_two_way_mxml'
   %p
-    one way as3 example
+    It's also possible to create bindings purely in AS3, although this doesn't get you all of the nice benefits of generated code like the
+    MXML examples mentioned above:
+    = partial 'padawan/binding_example_as3'
   %p
-    avoiding warnings with the [Bindable] tag, can bind props/gttrs+sttrs or gttrs with a custom [Bindable("eventName")] property
-    Yes, bindings are based on events that trigger event handlers which actually update the values. For any built-in Flex components
-    the API Docs will tell you what event triggers a binding for a given bindable property or method although generally speaking
-    you don't need to care.
+    There are two really interesting things to absorb in the AS3 example above:
+    %ul
+      %li
+        The 
+        %code
+          [Bindable] 
+        metadata tag on the 
+        %code
+          runningTime 
+        variable allows it to actually be bound and propagate its value. Behind the scenes,
+        the Flex compiler is generating code for you again that basically wraps your variable in a getter/setter. If you omit the 
+        %code
+          [Bindable]
+        tag you will get compile-time warnings in Flash Builder and anything attempting to bind to the variable will only ever get the variable's
+        value once, when it first attempts to bind. You can have as many bindable things as you want in your classes and you can use the
+        [Bindable] tag on properties, static properties, getter/setter pairs, getters with a custom event specified or even on the class 
+        definition itself (in which case all public properties and getter/setters will become bindable).
+        %p
+          %em
+            NOTE: 
+            %code
+              [Bindable] 
+            takes an optional event name parameter that allows you to specify on which event you want the bindings to fire
+            and update themselves. Specifying the event looks like this: 
+            %code
+              [Bindable("myCustomEvent")] 
+            and you can use this syntax to trigger
+            a bunch of bindings from your class at once or just forcing the binding to update by dispatching that event yourself. The default
+            event is called 
+            %code
+              "propertyChange"
+            and is of type 
+            %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/mx/events/PropertyChangeEvent.html?allClasses=1", :title => "Flex PropertyChangeEvent docs"}
+              PropertyChangeEvent.
+            For any built-in Flex components the 
+            %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/?allClasses=1", :title => "Flex 4 API docs" }
+              API Docs
+            will tell you what event triggers a binding for a given bindable property or method although generally speaking you don't need to care.
+      %li
+        MXML binding syntax is
+        %strong
+          awesome.
+        %p
+          Look at
+          %code
+            text="Running Time: {Math.round( runningTime/1000 )}s"
+          \. That one line is doing String interpolation, calling a function and performing math on our bindable variable. When generating
+          your binding, the Flex compiler will search the expression for all bindable variables and evaluate the entire expression when
+          one of them is triggered. You can pretty much make the expression as complicated as you want, although you should always
+          keep code maintainability in mind and only use what you need. You can even bind on chains of properties, like
+          %code
+            currentUser.dateOfBirth.year
+          if you make each step in the chain bindable as well.
+  %p
+    In short, get to know your bindings and go forth and use them copiously, because a few well placed bindings can DRY up a bunch of event listener
+    based code you'd have to write yourself to do the same thing, improving quality and maintainability. Yay.
+  %p
+    Check out the
+    %a{ :href => "http://livedocs.adobe.com/flex/3/html/help.html?content=databinding_8.html", :title => "Flex Data Binding docs"}
+      Flex Data Binding docs
+    for more information.
 %h3
   %a{ :name => "trace" }
     What is trace()?

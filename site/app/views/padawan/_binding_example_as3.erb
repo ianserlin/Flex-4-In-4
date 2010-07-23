@@ -3,32 +3,51 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
-			   minWidth="955" minHeight="600">
+			   applicationComplete="application_applicationCompleteHandler(event)">
+	
+	<fx:Script>
+		&lt;![CDATA[
+			import flash.utils.setInterval;
+			
+			import mx.events.FlexEvent;
+			
+			/**
+			 * The total amount of time the application has been running.
+			 */
+			[Bindable]
+			public var runningTime:Number;
+			
+			/**
+			 * When the application loads, start the stop watch.
+			 */
+			protected function application_applicationCompleteHandler(event:FlexEvent):void {
+				// update the current amount of seconds the app has been running
+				// once per second
+				setInterval( function():void {
+					runningTime = getTimer();
+				}, 1000 );
+			}
+		]]&gt;
+	</fx:Script>
 	
 	<s:layout>
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
-
-	<!-- TWO WAY BINDING -->
-	<s:Label text="Two Way Binding (left to right and right to left)"/>
-	<s:HGroup>
-		<s:TextInput id="twoWayBindingSourceATextInput"
-					 text="@{twoWayBindingSourceBTextInput.text}"/>
-		<s:TextInput id="twoWayBindingSourceBTextInput"
-					 text="@{twoWayBindingSourceATextInput.text}"/>
-	</s:HGroup>
+	
+	<s:Label id="runningTimeLabel"
+			 text="Running Time: {Math.round( runningTime/1000 )}s"/>
+	
 </s:Application>
-
 </script>
 
-<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="BindingsTwoWay">
-    <param name="movie" value="/swfs/BindingsTwoWay.swf" />
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="BindingsAS3">
+    <param name="movie" value="/swfs/BindingsAS3.swf" />
     <param name="quality" value="high" />
     <param name="bgcolor" value="#eeeeee" />
     <param name="allowScriptAccess" value="sameDomain" />
     <param name="allowFullScreen" value="false" />
     <!--[if !IE]>-->
-    <object type="application/x-shockwave-flash" data="/swfs/BindingsTwoWay.swf" width="650" height="300">
+    <object type="application/x-shockwave-flash" data="/swfs/BindingsAS3.swf" width="650" height="300">
         <param name="quality" value="high" />
         <param name="bgcolor" value="#eeeeee" />
         <param name="allowScriptAccess" value="sameDomain" />
