@@ -11,11 +11,11 @@
       %a{ :href => "#flashbuilder" }
         What is Adobe Flash Builder/Flex Builder?
     %li
-      %a{ :href => "#mxml" }
-        What is MXML?
-    %li
       %a{ :href => "#as3" }
         What is ActionScript 3 (AS3)?
+    %li
+      %a{ :href => "#mxml" }
+        What is MXML?
     %li
       %a{ :href => "#swf" }
         What is a SWF?
@@ -81,18 +81,85 @@
 %h3
   %a{ :name => "flex" }
     What is Adobe Flex?
+.definition
+  %p
+    The 
+    %a{ :href => "", :title => "Adobe Flex SDK @ adobe.com" }
+      Adobe Flex SDK 
+    is a framework, a library of classes and components written in the
+    %a{ :href => "#as3", :title => "What is ActionScript 3?"}
+      ActionScript 3
+    language that are provided to you so that you can build applications that run on the Adobe Flash
+    platform more quickly and at a higher quality. The Flex SDK layers many ideas on top of the base
+    Flash API, including a secondary, XML based language named
+    %a{ :href => "#mxml", :title => "What is MXML?" }
+      MXML.
+  %p
+    The Flex SDK is free, open source and the gold standard for creating any kind of mildly complex
+    application that runs in Flash. The most recent major revision of the SDK if Flex 4, which is what
+    this site is all about. Yay learning!
 %h3
   %a{ :name => "flashbuilder" }
     What is Adobe Flash Builder/Flex Builder?
-%h3
-  %a{ :name => "mxml" }
-    What is MXML?
+.definition
+  %p
+    %a{ :href => "", :title => "Adobe Flash Builder 4 @ adobe.com" }
+      Flash Builder 4
+    is the latest version of Adobe's custom IDE for creating 
+    %a{ :href => "#as3", :title => "What is ActionScript 3?"}
+      ActionScript 3
+    and Flex-based applications.
+    It's based on 
+    %a{ :href => "", :title => "The Eclipse IDE" }
+      Eclipse 
+    and you can install it as a standalone application or as a plug-in for an existing Eclipse installation.
+    Unfortunately, it is not free, but is extremely useful and relatively easy to work with. It includes a built-in
+    visual debugger, network monitoring, an application and memory profiler and, of course, auto-complete.
+  %p
+    However, there are other graphical IDEs for developing Flex applications like
+    %a{ :href => "", :title => "" }
+      FDT
+    and
+    %a{ :href => "", :title => "" }
+      IntelliJ
+    as well as custom solutions for independent editors like
+    %a{ :href => "", :title => "" }
+      TextMate
+    based on the free Flex compiler (mxmlc) and you should try them all and use the tool that suits you best.
+  %p
+    For the release of Flex 4, Flash Builder was rebranded as such instead of being called Flex Builder as it was in previous
+    versions. This was done to clear up confusion related to the similar naming between the free Flex SDK and the for-profit Builder IDE.
 %h3
   %a{ :name => "as3" }
     What is ActionScript 3 (AS3)?
 .definition
   %p
-    Strongly-typed, object-oriented mix between Java and JavaScript with its own set of built-in classes and utilities.
+    Strongly-typed, object-oriented mix between Java and JavaScript with its own set of built-in classes and utilities.    
+%h3
+  %a{ :name => "mxml" }
+    What is MXML?
+.definition
+  %p
+    MXML is a markup language in that is based on well-formed XML and is mostly used to design the visual look and feel of a Flex
+    application. Pretend for a second that HTML was one with the force, maybe in a year or two you would call it HTML5, but for now
+    at least it's name would be MXML. Even though the visual components that are built-in to the Flex SDK are written in ActionScript 3 
+    and when you create any kind of sophisticated application you will write some part of it (maybe most of it) in ActionScript 3, you can
+    use these components declaratively in MXML:
+    = partial 'padawan/mxml_example'
+  %p
+    In this example we are creating a Flex application using the
+    %a{ :href => "#application", :title => "What is an Application?" }
+      Application
+    tag and we're declaring that inside of it we want an instance of the
+    %a{ :href => "", :title => "Flex 4 Label Component" }
+      Label 
+    class to be constructed and with its
+    %code
+      id
+    property to "theLabel" and its
+    %code
+      text
+    property to "Mufasa!".
 %h3
   %a{ :name => "swf" }
     What is a SWF?

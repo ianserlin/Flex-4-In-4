@@ -6,25 +6,14 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import flash.utils.setInterval;
 			
 			import mx.events.FlexEvent;
 			
 			/**
-			 * The total amount of time the application has been running.
-			 */
-			[Bindable]
-			public var runningTime:Number;
-			
-			/**
-			 * When the application loads, start the stop watch.
+			 * When the application loads, change the label to say "Simba, I am your father!"
 			 */
 			protected function application_applicationCompleteHandler(event:FlexEvent):void {
-				// update the current amount of seconds the app has been running
-				// once per second
-				setInterval( function():void {
-					runningTime = getTimer();
-				}, 1000 );
+				theLabel.text = "Simba, I am your father!";
 			}
 		]]>
 	</fx:Script>
@@ -33,7 +22,6 @@
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
-	<s:Label id="runningTimeLabel"
-			 text="Running Time: {Math.round( runningTime/1000 )}s"/>
+	<s:Label id="theLabel" text="Mufasa!"/>
 	
 </s:Application>
