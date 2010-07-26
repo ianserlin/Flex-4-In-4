@@ -2,37 +2,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx"> 
+			   xmlns:mx="library://ns.adobe.com/flex/mx">
 	
 	<fx:Script>
-		&gt;![CDATA[
-			
-			import mx.events.FlexEvent;
-			
+		&lt;[CDATA[
 			/**
 			 * Just your average, run of the mill bindable String.
 			 */
 			[Bindable]
 			public var yourSentence:String = "change me!";
-			
-		]]&lt;
+		]]&gt;
 	</fx:Script>
 	
 	<s:layout>
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
+	<s:Label text="One Way vs. Two Way Binding Example"/>
 	
-	<!-- TWO WAY BINDING -->
-	<s:Label id="oneWay_Bound_Label"
-			 text="{yourSentence}" 
-			 width="300"/>
-	<s:TextInput id="twoWay_Bound_textInput"
+	<!-- ONE WAY BINDING, changing this will not change the 'yourSentence' variable -->
+	<s:TextInput id="oneWay_Bound_TextInput"
+				 text="{yourSentence}" 
+				 width="300"/>
+	
+	<!-- TWO WAY BINDING, changing this will change the 'yourSentence' variable -->
+	<s:TextInput id="twoWay_Bound_TextInput"
 				 text="@{yourSentence}"
 				 width="300"/>
 
 </s:Application>
-
 
 </script>
 

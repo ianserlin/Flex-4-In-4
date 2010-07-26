@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx"
-			   applicationComplete="applicationCompleteHandler(event)"> 
+			   xmlns:mx="library://ns.adobe.com/flex/mx">
 	
 	<fx:Script>
 		<![CDATA[
-			import mx.binding.utils.BindingUtils;
-			import mx.binding.utils.ChangeWatcher;
-			import mx.events.FlexEvent;
-			
 			/**
 			 * Just your average, run of the mill bindable String.
 			 */
 			[Bindable]
-			public var newSentence:String = "I am the new sentence, fresh out of your bindings baby!";
-			
-			/**
-			 * When the application loads, set up the bindings using AS3.
-			 */
-			protected function applicationCompleteHandler(event:FlexEvent):void {
-				var changeWatcher:ChangeWatcher = BindingUtils.bindProperty( targetLabel, "text", this, "newSentence" );
-				// to break the binding via AS3, cache the ChangeWatcher instance returned by BindingUtils
-				// and call:
-				// changeWatcher.unwatch();
-			}
-
+			public var yourSentence:String = "change me!";
 		]]>
 	</fx:Script>
 	
@@ -33,8 +17,16 @@
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
-	<s:Label id="targetLabel"
-			 text="this text will be updated via bindings"
-			 width="300"/>
+	<s:Label text="One Way vs. Two Way Binding Example"/>
+	
+	<!-- ONE WAY BINDING -->
+	<s:TextInput id="oneWay_Bound_TextInput"
+				 text="{yourSentence}" 
+				 width="300"/>
+	
+	<!-- TWO WAY BINDING -->
+	<s:TextInput id="twoWay_Bound_TextInput"
+				 text="@{yourSentence}"
+				 width="300"/>
 
 </s:Application>

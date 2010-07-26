@@ -109,7 +109,8 @@ h3 {
   margin-bottom: 50px; }
   .definition .title {
     margin-top: 20px;
-    font-size: 16px; }
+    font-size: 16px;
+    font-weight: bold; }
 
 #container {
   position: relative;
