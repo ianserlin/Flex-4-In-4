@@ -1,43 +1,44 @@
 <script type="syntaxhighlighter" class="brush: xml"><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" 
-			   applicationComplete="application_applicationCompleteHandler(event)">
-	
-	<fx:Script>
-		&lt;![CDATA[
-			import flash.utils.setInterval;
-			
-			import mx.events.FlexEvent;
-			
-			/**
-			 * The total amount of time the application has been running.
-			 */
-			[Bindable]
-			public var runningTime:Number;
-			
-			/**
-			 * When the application loads, start the stop watch.
-			 */
-			protected function application_applicationCompleteHandler(event:FlexEvent):void {
-				// update the current amount of seconds the app has been running
-				// once per second
-				setInterval( function():void {
-					runningTime = getTimer();
-				}, 1000 );
-			}
-		]]&gt;
-	</fx:Script>
-	
-	<s:layout>
-		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
-	</s:layout>
-	
-	<s:Label id="runningTimeLabel"
-			 text="Running Time: {Math.round( runningTime/1000 )}s"/>
-	
-</s:Application>
+  <?xml version="1.0" encoding="utf-8"?>
+  <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+  			   xmlns:s="library://ns.adobe.com/flex/spark" 
+  			   xmlns:mx="library://ns.adobe.com/flex/mx"
+  			   applicationComplete="applicationCompleteHandler(event)"> 
+
+  	<fx:Script>
+  		&lt;![CDATA[
+  			import mx.binding.utils.BindingUtils;
+  			import mx.binding.utils.ChangeWatcher;
+  			import mx.events.FlexEvent;
+
+  			/**
+  			 * Just your average, run of the mill bindable String.
+  			 */
+  			[Bindable]
+  			public var newSentence:String = "I am the new sentence, fresh out of your bindings baby!";
+
+  			/**
+  			 * When the application loads, set up the bindings using AS3.
+  			 */
+  			protected function applicationCompleteHandler(event:FlexEvent):void {
+  				var changeWatcher:ChangeWatcher = BindingUtils.bindProperty( targetLabel, "text", this, "newSentence" );
+  				// to break the binding via AS3, cache the ChangeWatcher instance returned by BindingUtils
+  				// and call:
+  				// changeWatcher.unwatch();
+  			}
+
+  		]]&gt;
+  	</fx:Script>
+
+  	<s:layout>
+  		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+  	</s:layout>
+
+  	<s:Label id="targetLabel"
+  			 text="this text will be updated via bindings"
+  			 width="300"/>
+
+  </s:Application>
 </script>
 
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="BindingsAS3">

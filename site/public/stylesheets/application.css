@@ -54,6 +54,13 @@ h3 {
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px; }
 
+.sidebar {
+  margin: 10px;
+  padding: 8px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  background: white; }
+
 .notice {
   color: white;
   background: #666666;
@@ -100,6 +107,9 @@ h3 {
   -webkit-border-radius: 7px;
   line-height: 1.5em;
   margin-bottom: 50px; }
+  .definition .title {
+    margin-top: 20px;
+    font-size: 16px; }
 
 #container {
   position: relative;

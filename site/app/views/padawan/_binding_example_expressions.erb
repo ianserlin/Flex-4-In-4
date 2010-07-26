@@ -2,48 +2,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx"> 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   applicationComplete="application_applicationCompleteHandler(event)">
 	
 	<fx:Script>
-		&gt;![CDATA[
+		&lt;![CDATA[
+			import flash.utils.setInterval;
 			
 			import mx.events.FlexEvent;
 			
 			/**
-			 * Just your average, run of the mill bindable String.
+			 * The total amount of time the application has been running.
 			 */
 			[Bindable]
-			public var yourSentence:String = "change me!";
+			public var runningTime:Number;
 			
-		]]&lt;
+			/**
+			 * When the application loads, start the stop watch.
+			 */
+			protected function application_applicationCompleteHandler(event:FlexEvent):void {
+				// update the current amount of seconds the app has been running
+				// once per second
+				setInterval( function():void {
+					runningTime = getTimer();
+				}, 1000 );
+			}
+		]]&gt;
 	</fx:Script>
 	
 	<s:layout>
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
+	<s:Label id="runningTimeLabel"
+			 text="Running Time: {Math.round( runningTime/1000 )}s"/>
 	
-	<!-- TWO WAY BINDING -->
-	<s:Label id="oneWay_Bound_Label"
-			 text="{yourSentence}" 
-			 width="300"/>
-	<s:TextInput id="twoWay_Bound_textInput"
-				 text="@{yourSentence}"
-				 width="300"/>
-
 </s:Application>
-
-
 </script>
 
-<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="BindingsTwoWay">
-    <param name="movie" value="/swfs/BindingsTwoWay.swf" />
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="BindingsExpressions">
+    <param name="movie" value="/swfs/BindingsExpressions.swf" />
     <param name="quality" value="high" />
     <param name="bgcolor" value="#eeeeee" />
     <param name="allowScriptAccess" value="sameDomain" />
     <param name="allowFullScreen" value="false" />
     <!--[if !IE]>-->
-    <object type="application/x-shockwave-flash" data="/swfs/BindingsTwoWay.swf" width="650" height="300">
+    <object type="application/x-shockwave-flash" data="/swfs/BindingsExpressions.swf" width="650" height="300">
         <param name="quality" value="high" />
         <param name="bgcolor" value="#eeeeee" />
         <param name="allowScriptAccess" value="sameDomain" />
