@@ -552,8 +552,14 @@
   %p.title
     One-Way Bindings in ActionScript 3
   %p
-    It's also possible to create bindings purely in AS3, although this doesn't get you all of the nice benefits of generated code like the
-    MXML examples mentioned above, but in a pinch, this is how you do it:
+    It's also possible to create bindings purely in AS3. Although this doesn't get you all of the nice benefits of generated code like the
+    MXML examples mentioned above, in a pinch you can wire things up like in the following example where we're dynamically setting
+    the background and border color of the 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/primitives/Rect.html?allClasses=1", :title => "Flex 4 Rectangle" }
+      Rectangle 
+    via the
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/mx/controls/ColorPicker.html?allClasses=1", :title => "Flex Color Picker" }
+      ColorPickers:
     = partial 'padawan/binding_example_as3'
 
   %p

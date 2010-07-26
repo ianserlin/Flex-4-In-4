@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   applicationComplete="applicationCompleteHandler(event)"> 
 	
 	<fx:Script>
 		<![CDATA[
+			import mx.binding.utils.BindingUtils;
+			import mx.binding.utils.ChangeWatcher;
+			import mx.events.FlexEvent;
+			
 			/**
-			 * Just your average, run of the mill bindable String.
+			 * When the application loads, set up the bindings using AS3.
 			 */
-			[Bindable]
-			public var yourSentence:String = "change me!";
+			protected function applicationCompleteHandler(event:FlexEvent):void {
+				// bind the borderColorPicker's selectedColor property to the customizableRectangle's fill's color property
+				var changeWatcher:ChangeWatcher = BindingUtils.bindProperty( customizableRectangleFill, "color", backgroundColorPicker, "selectedColor" );
+				// NOTE: to break the binding via AS3, cache the ChangeWatcher instance returned by BindingUtils and call:
+				// changeWatcher.unwatch();
+				
+				// bind the borderColorPicker's selectedColor property to the customizableRectangle's border's color property
+				BindingUtils.bindProperty( customizableRectangleBorder, "color", borderColorPicker, "selectedColor" );
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -17,16 +30,21 @@
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
-	<s:Label text="One Way vs. Two Way Binding Example"/>
+	<s:HGroup>
+		<s:Label text="Background Color:"/>
+		<mx:ColorPicker id="backgroundColorPicker"/>
+		<s:Label text="Border Color:"/>
+		<mx:ColorPicker id="borderColorPicker"/>
+	</s:HGroup>
 	
-	<!-- ONE WAY BINDING -->
-	<s:TextInput id="oneWay_Bound_TextInput"
-				 text="{yourSentence}" 
-				 width="300"/>
+	<s:Rect id="customizableRectangle"
+			width="300" height="150">
+		<s:fill>
+			<s:SolidColor id="customizableRectangleFill"/>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke id="customizableRectangleBorder" weight="5"/>
+		</s:stroke>
+	</s:Rect>
 	
-	<!-- TWO WAY BINDING -->
-	<s:TextInput id="twoWay_Bound_TextInput"
-				 text="@{yourSentence}"
-				 width="300"/>
-
 </s:Application>

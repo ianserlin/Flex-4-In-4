@@ -1,46 +1,58 @@
 <script type="syntaxhighlighter" class="brush: mxml"><![CDATA[
-  <?xml version="1.0" encoding="utf-8"?>
-  <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-  			   xmlns:s="library://ns.adobe.com/flex/spark" 
-  			   xmlns:mx="library://ns.adobe.com/flex/mx"
-  			   applicationComplete="applicationCompleteHandler(event)"> 
-
-  	<fx:Script>
-  		&lt;![CDATA[
-  			import mx.binding.utils.BindingUtils;
-  			import mx.binding.utils.ChangeWatcher;
-  			import mx.events.FlexEvent;
-
-  			/**
-  			 * Just your average, run of the mill bindable String.
-  			 */
-  			[Bindable]
-  			public var newSentence:String = "I am the new sentence, fresh out of your bindings baby!";
-
-  			/**
-  			 * When the application loads, set up the bindings using AS3.
-  			 */
-  			protected function applicationCompleteHandler(event:FlexEvent):void {
-  				var changeWatcher:ChangeWatcher = BindingUtils.bindProperty( targetLabel, "text", this, "newSentence" );
-  				// to break the binding via AS3, cache the ChangeWatcher instance returned by BindingUtils
-  				// and call:
-  				// changeWatcher.unwatch();
-  			}
-
-  		]]&gt;
-  	</fx:Script>
-
-  	<s:layout>
-  		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
-  	</s:layout>
-
-  	<s:Label id="targetLabel"
-  			 text="this text will be updated via bindings"
-  			 width="300"/>
-
-  </s:Application>
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   applicationComplete="applicationCompleteHandler(event)"> 
+	
+	<fx:Script>
+		&lt;![CDATA[
+			import mx.binding.utils.BindingUtils;
+			import mx.binding.utils.ChangeWatcher;
+			import mx.events.FlexEvent;
+			
+			/**
+			 * When the application loads, set up the bindings using AS3.
+			 */
+			protected function applicationCompleteHandler(event:FlexEvent):void {
+				// bind the borderColorPicker's selectedColor property to the customizableRectangle's fill's color property
+				var changeWatcher:ChangeWatcher = BindingUtils.bindProperty( customizableRectangleFill, "color", backgroundColorPicker, "selectedColor" );
+				// NOTE: to break the binding via AS3, cache the ChangeWatcher instance returned by BindingUtils and call:
+				// changeWatcher.unwatch();
+				
+				// bind the borderColorPicker's selectedColor property to the customizableRectangle's border's color property
+				BindingUtils.bindProperty( customizableRectangleBorder, "color", borderColorPicker, "selectedColor" );
+			}
+			
+		]]&gt;
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:layout>
+	
+	<s:HGroup>
+		<s:Label text="Background Color:"/>
+		<mx:ColorPicker id="backgroundColorPicker"/>
+		<s:Label text="Border Color:"/>
+		<mx:ColorPicker id="borderColorPicker"/>
+	</s:HGroup>
+	
+	<s:Rect id="customizableRectangle"
+			width="300" height="150">
+		<s:fill>
+			<s:SolidColor id="customizableRectangleFill"/>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke id="customizableRectangleBorder" weight="5"/>
+		</s:stroke>
+	</s:Rect>
+	
+</s:Application>
 </script>
-
+<p>
+  Go ahead and try it!
+</p>
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="BindingsAS3">
     <param name="movie" value="/swfs/BindingsAS3.swf" />
     <param name="quality" value="high" />

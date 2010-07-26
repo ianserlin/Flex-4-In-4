@@ -73,7 +73,7 @@
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString,		css: 'string' },		// single quoted strings
 			{ regex: /\b([\d]+(\.[\d]+)?|0x[a-f0-9]+)\b/gi,				css: 'value' },			// numbers
 			{ regex: new RegExp(this.getKeywords(inits), 'gm'),			css: 'color3' },		// initializations
-			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword' },		// keywords
+			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'color2' },		// keywords
 			{ regex: new RegExp('var', 'gm'),							css: 'variable' },		// variable
 			{ regex: new RegExp('trace', 'gm'),							css: 'color1' }			// trace
 		];
