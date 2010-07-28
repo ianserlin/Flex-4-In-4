@@ -112,6 +112,11 @@ h3 {
     font-size: 16px;
     font-weight: bold; }
 
+ul.spaced li {
+  margin-bottom: 10px; }
+  ul.spaced li .title {
+    font-weight: strong; }
+
 #container {
   position: relative;
   margin: 0 auto;

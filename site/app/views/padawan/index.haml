@@ -45,7 +45,7 @@
         What is a skin?
     %li
       %a{ :href => "#css" }
-        What does CSS mean in regards to Flex?
+        What is a style and what is Flex CSS?
     %li
       %a{ :href => "#state" }
         What is a State?
@@ -117,13 +117,13 @@
     visual debugger, network monitoring, an application and memory profiler and, of course, auto-complete.
   %p
     However, there are other graphical IDEs for developing Flex applications like
-    %a{ :href => "", :title => "" }
+    %a{ :href => "", :title => "The Free, Open-Source FDT Flex/AS3 IDE" }
       FDT
     and
     %a{ :href => "", :title => "" }
       IntelliJ
     as well as custom solutions for independent editors like
-    %a{ :href => "", :title => "" }
+    %a{ :href => "http://textmate.com", :title => "The Infamous TextMate editor for OS X" }
       TextMate
     based on the free Flex compiler (mxmlc) and you should try them all and use the tool that suits you best.
   %p
@@ -141,25 +141,157 @@
 .definition
   %p
     MXML is a markup language in that is based on well-formed XML and is mostly used to design the visual look and feel of a Flex
-    application. Pretend for a second that HTML was one with the force, maybe in a year or two you would call it HTML5, but for now
-    at least it's name would be MXML. Even though the visual components that are built-in to the Flex SDK are written in ActionScript 3 
-    and when you create any kind of sophisticated application you will write some part of it (maybe most of it) in ActionScript 3, you can
-    use these components declaratively in MXML:
+    application and is contained in files that have an .mxml extension. Pretend for a second that HTML was one with the force, 
+    perhaps in a year or two you would call it HTML5, but for now at least it's name is MXML and it's a pretty hand shorthand 
+    for creating components quickly and that are easy to read.
+  %p
+    Even though the visual components that are built-in to the Flex SDK are written in ActionScript 3 and you can do everything you
+    can in MXML in ActionScript 3 and when you create any kind of sophisticated application you will write some part of it 
+    (maybe most of it) in ActionScript 3, you will most likely be writing a lot of MXML. This is what it looks like:
     = partial 'padawan/mxml_example'
   %p
-    In this example we are creating a Flex application using the
-    %a{ :href => "#application", :title => "What is an Application?" }
-      Application
-    tag and we're declaring that inside of it we want an instance of the
-    %a{ :href => "", :title => "Flex 4 Label Component" }
-      Label 
-    class to be constructed and with its
-    %code
-      id
-    property to "theLabel" and its
-    %code
-      text
-    property to "Mufasa!".
+    Let's take this line by line.
+    %ul.spaced
+      %li
+        .title
+          Creating the
+          %a{ :href => "#application", :title => "What is an Application?" }
+            Application
+          \: Line 2
+        This is the top-most container in any Flex application and should be in the first file that gets loaded. All MXML files
+        will have an outer-most class declaration at the top.
+      %li
+        .title
+          XML namespaces: Lines 2-4
+        Like all good XML files, tags in MXML are namespaced - in particular the
+        %code
+          mx
+        namespace refers to Flex 3/Halo components and the
+        %code
+          s
+        namespace refers to those classes that were introduced in Flex 4/Gumbo/Spark.
+      %li
+        .title
+          Inline event handlers: Line 5
+        Almost all visual components in Flex dispatch some variety of 
+        %a{ :href => "#event", :title => "What is an event/event dispatcher?"}
+          events. 
+        In MXML you can use this inline syntax
+        to specify a function to call when the event occurs. Actually, you can also write inline ActionScript 3 here instead
+        but that's frowned upon the same way that inline JavaScript is in HTML because it's not as reusable and not
+        as maintainable.
+      %li
+        .title
+          Inline effect triggers: Line 6
+        Almost all visual components in Flex also support some variety of 
+        %a{ :href => "#effect", :title => "What is an effect?" }
+          effects
+        that are triggered by certain things that happen to the component, such as the
+        %code
+          showEffect
+        when the component's visibility property changes from 
+        %code
+          false to 
+        %code
+          true, 
+        the 
+        %code
+          resizeEffect
+        when the component's size changes, or in this case the
+        %code
+          addedEffect
+        when this component becomes the child of another component ( here the Application instance is becoming a child of the
+        %a{ :href => "#displaylist", :title => "About the Stage and the Display List"}
+          Stage
+        ). You can bind the trigger you're interested in to an instance of a
+        %code
+          spark.effects.Effect
+        subclass and that effect will have its
+        %code
+          play(...)
+        method called passing in your component when the effect is triggered.
+      %li
+        .title
+          The Metadata block: Lines 8-10
+        At various points in time you'll need to add metadata to your classes like when you're creating custom
+        %a{ :href => "#skin", :title => "What is a skin?" }
+          skins
+        or simply specifying that your component dispatches custom events. In ActionScript 3 you add these metadata
+        tags immediately preceding the class declaration, suffice it to say for now that the
+        %code
+          fx:Metadata
+        block is where you stick these things in MXML.
+      %li
+        .title
+          Inline ActionScript 3: Lines 12-24
+        Oh yes, you can embed AS3 directly in an MXML class by sticking in an
+        %code
+          fx:Script
+        block similar to how you would add a 
+        %code
+          <script type="text/javascript">...your code...</script>
+        block in an HTML page. You can do anything you can in a
+        %code
+          \.as
+        file and this can be extremely convenient, but again, for anything mildly complex you probably want to
+        pull that code out into a separate ActionScript 3 file to keep your code clean and simple.
+      %li
+        .title
+          Inline Declarations: Lines 26-29
+        While you can add any visual component as a direct child of a
+        %a{ :href => "#container", :title => "What is a container?" }
+          container
+        (like Application, Group, Panel, etc.) in MXML, any
+        %em
+          non-visual elements
+        must be contained within an
+        %code
+          fx:Declarations
+        block. In this case, we're defining an instance of the 
+        %a{ :href => "", :title => "Flex 4 Fade Effect"}
+          Fade
+        effect which acts on visual components but is not itself a visual component, and an instance of a 
+        %code
+          String.
+        Most of the time you probably won't want to declare value objects (like Strings, Arrays, etc.) in MXML,
+        instead preferring to stick them in the 
+        %code
+          fx:Script
+        block, but it's nice to know you can if you need to.
+      %li
+        .title
+          Setting properties via MXML tags: Lines 31-33
+        This 
+        %code
+          s:layout
+        tag actually belongs to the 
+        %code
+          s:Application
+        instance and what we put inside the tag gets assigned to the Application's .layout property. There
+        are a few cases where this particular syntax is convenient because it's easier to express what you want
+        in MXML tags, e.g. when you're creating a new instance of a class whose constructor doesn't take any arguments.
+        There are also some properties which are almost always set using this syntax by convention, like layouts.
+        You can use
+        %a{ :href => "#binding", :title => "What is a binding?" }
+          binding
+        syntax here.
+      %li
+        .title{ :style => "font-size: 14px;"}
+          Adding child components: Line 35
+        The bread and the butter - grouping and arranging the unique set of controls that your users will interact with is 
+        the main strength of MXML and what probably the most common thing you'll use it for. Here we're creating a new instance of the
+        %a{ :href => "", :title => "Flex 4 Label Component" }
+          Label 
+        class with its
+        %code
+          id
+        property initialized to "theLabel" and its
+        %code
+          text
+        property initialized to "Mufasa!". This label instance then becomes a direct child of and is owned and positioned by the Application container. 
+    %p
+      Holy Yoda - that was a lot of information to throw at you - just keep in mind that MXML files can be a nice way to make a lot of things
+      happen with a little bit of code and come back and use this section as a reference if you need to.
 %h3
   %a{ :name => "swf" }
     What is a SWF?
@@ -191,7 +323,7 @@
   
 %h3
   %a{ :name => "css" }
-    What does CSS mean in regards to Flex?
+    What is a style and what is Flex CSS?
 %h3
   %a{ :name => "state" }
     What is a State?
@@ -293,7 +425,7 @@
     %strong
       The More You Know: 
   %p  
-    Keep in mind that it's easy to over use  effects and a little animation goes a long way: pay particular attention to the durations when designing. 
+    Keep in mind that it's easy to over use effects and a little animation goes a long way: pay particular attention to the durations when designing. 
     Also, stay away from anything in the mx.effects.* package if you possibly can because these were superseded in Flex 4 by the spark.effects.* 
     package where lives all your animation treats.
     
@@ -335,7 +467,8 @@
     (i.e. interviewers) have been known to destroy many a padawan's hopes and dreams with questions like this.
   %p
     %strong
-      Display List
+      %a{ :name => "displaylist" }
+        Display List
   %p
     All visual objects ( e.g. 
     %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/flash/events/Event.html?allClasses=1#currentTarget", :title => "Flex 4 Group container" }

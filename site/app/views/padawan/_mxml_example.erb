@@ -1,10 +1,15 @@
 <script type="syntaxhighlighter" class="brush: mxml"><![CDATA[
 
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" 
-			   applicationComplete="applicationCompleteHandler(event)">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   applicationComplete="applicationCompleteHandler(event)"
+			   addedEffect="{fadeIn}">
+	
+	<fx:Metadata>
+		[Event(name="someEvent", type="flash.events.Event")]
+	</fx:Metadata>
 	
 	<fx:Script>
 		&lt;![CDATA[
@@ -15,10 +20,15 @@
 			 * When the application loads, change the label to say "Simba, I am your father!"
 			 */
 			protected function applicationCompleteHandler(event:FlexEvent):void {
-				theLabel.text = "Simba, I am your father!";
+				theLabel.text = simbaString;
 			}
 		]]&gt;
 	</fx:Script>
+	
+	<fx:Declarations>
+		<fx:String id="simbaString">Simba, I am your father!</fx:String>
+		<s:Fade id="fadeIn" duration="600" alphaFrom="0" alphaTo="1"/>
+	</fx:Declarations>
 	
 	<s:layout>
 		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
