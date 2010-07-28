@@ -153,7 +153,7 @@
     Let's take this line by line.
     %ul.spaced
       %li
-        .title
+        .heading
           Creating the
           %a{ :href => "#application", :title => "What is an Application?" }
             Application
@@ -161,7 +161,7 @@
         This is the top-most container in any Flex application and should be in the first file that gets loaded. All MXML files
         will have an outer-most class declaration at the top.
       %li
-        .title
+        .heading
           XML namespaces: Lines 2-4
         Like all good XML files, tags in MXML are namespaced - in particular the
         %code
@@ -171,7 +171,7 @@
           s
         namespace refers to those classes that were introduced in Flex 4/Gumbo/Spark.
       %li
-        .title
+        .heading
           Inline event handlers: Line 5
         Almost all visual components in Flex dispatch some variety of 
         %a{ :href => "#event", :title => "What is an event/event dispatcher?"}
@@ -181,7 +181,7 @@
         but that's frowned upon the same way that inline JavaScript is in HTML because it's not as reusable and not
         as maintainable.
       %li
-        .title
+        .heading
           Inline effect triggers: Line 6
         Almost all visual components in Flex also support some variety of 
         %a{ :href => "#effect", :title => "What is an effect?" }
@@ -211,7 +211,7 @@
           play(...)
         method called passing in your component when the effect is triggered.
       %li
-        .title
+        .heading
           The Metadata block: Lines 8-10
         At various points in time you'll need to add metadata to your classes like when you're creating custom
         %a{ :href => "#skin", :title => "What is a skin?" }
@@ -222,7 +222,7 @@
           fx:Metadata
         block is where you stick these things in MXML.
       %li
-        .title
+        .heading
           Inline ActionScript 3: Lines 12-24
         Oh yes, you can embed AS3 directly in an MXML class by sticking in an
         %code
@@ -236,7 +236,7 @@
         file and this can be extremely convenient, but again, for anything mildly complex you probably want to
         pull that code out into a separate ActionScript 3 file to keep your code clean and simple.
       %li
-        .title
+        .heading
           Inline Declarations: Lines 26-29
         While you can add any visual component as a direct child of a
         %a{ :href => "#container", :title => "What is a container?" }
@@ -259,7 +259,7 @@
           fx:Script
         block, but it's nice to know you can if you need to.
       %li
-        .title
+        .heading
           Setting properties via MXML tags: Lines 31-33
         This 
         %code
@@ -276,7 +276,7 @@
           binding
         syntax here.
       %li
-        .title{ :style => "font-size: 14px;"}
+        .heading{ :style => "font-size: 14px;"}
           Adding child components: Line 35
         The bread and the butter - grouping and arranging the unique set of controls that your users will interact with is 
         the main strength of MXML and what probably the most common thing you'll use it for. Here we're creating a new instance of the
