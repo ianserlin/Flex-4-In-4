@@ -23,6 +23,9 @@
       %a{ :href => "#swc" }
         What is a SWC?
     %li
+      %a{ :href => "#swz" }
+        What is a SWZ?        
+    %li
       %a{ :href => "#project" }
         What is a Flex Project?
     %li
@@ -98,6 +101,8 @@
     The Flex SDK is free, open source and the gold standard for creating any kind of mildly complex
     application that runs in Flash. The most recent major revision of the SDK if Flex 4, which is what
     this site is all about. Yay learning!
+
+
 %h3
   %a{ :name => "flashbuilder" }
     What is Adobe Flash Builder/Flex Builder?
@@ -129,12 +134,16 @@
   %p
     For the release of Flex 4, Flash Builder was rebranded as such instead of being called Flex Builder as it was in previous
     versions. This was done to clear up confusion related to the similar naming between the free Flex SDK and the for-profit Builder IDE.
+    
+    
 %h3
   %a{ :name => "as3" }
     What is ActionScript 3 (AS3)?
 .definition
   %p
     Strongly-typed, object-oriented mix between Java and JavaScript with its own set of built-in classes and utilities.    
+    
+    
 %h3
   %a{ :name => "mxml" }
     What is MXML?
@@ -292,38 +301,217 @@
     %p
       Holy Yoda - that was a lot of information to throw at you - just keep in mind that MXML files can be a nice way to make a lot of things
       happen with a little bit of code and come back and use this section as a reference if you need to.
+      
+      
 %h3
   %a{ :name => "swf" }
     What is a SWF?
+.definition
+  %p
+    SWF files are the compiled version of your 
+    %a{ :href => "#project", :title => "What is a Flex Project?"}
+      Flex
+    or ActionScript Project, like an .exe on Windows or .app on Mac except that they are cross-platform. Inside is an intermediary 
+    byte-code that is interpreted  and executed by the Flash Player runtime. While you can run SWFs independently in a browser or 
+    from your desktop, they are typically embedded into web pages using the 
+    %code
+      &lt;object/&gt;
+    and
+    %code
+      &lt;embed/&gt;
+    tags or via JavaScript using something like
+    %a{ :href => "http://code.google.com/p/swfobject/", :title => "SWFObject JavaScript library" }
+      SWFObject
+    which is the gold standard way of embedding SWFs that bakes in Flash Player version checking and upgrading.
+    
+    
 %h3
   %a{ :name => "swc" }
     What is a SWC?
+.definition
+  %p
+    SWCs are compiled versions of your 
+    %a{ :href => "#libraryproject", :title => "What is a Flex Library Project?"}
+      Flex Library
+    projects. These typically contain 3rd party libraries of classes, utilities and components that you can link in and use
+    in your Flex projects. SWCs are just a more compact way of reusing functionality than including a bunch of extra source
+    code in your 
+    %a{ :href => "#app", :title => "What is an Application?" }
+      application 
+    that you don't need to modify yourself. If your familiar with Java, SWCs are the equivalent of library jars.
+%h3
+  %a{ :name => "swz" }
+    What is a SWZ?
+.definition
+  %p
+    SWZs are the same as SWCs except that they are officially "signed" by a certifier, such as Adobe, to be authentic
+    and unadulterated. You probably won't be creating any SWZs yourself, but you might see them most notably as packaged
+    versions of the Flex SDK and related Adobe libraries if you're using
+    %a{ :href => "http://livedocs.adobe.com/flex/3/html/help.html?content=rsl_09.html", :title => "Flex Runtime Shared Loading explanation" }
+      RSL linking
+    in your projects.
+    
+    
 %h3
   %a{ :name => "project" }
     What is a Flex Project?
+.definition
+  %img.right{ :src => "/images/project_example.png", :alt => "Flex Project Directory Structure" }
+  A Flex Project is simply a collection of files and folders that make up the Flex application you are creating. In a Flex Project, only
+  those classes and assets that are actually used (including those you linked in from SWCs depending on your compiler settings)
+  will be compiled into the final SWF output file, unlike
+  %a{ :href => "#libraryproject", :title => "What is a Flex Library Project?" }
+    Flex Library Projects
+  \.
+  The typical directory structure includes:
+  %ul.spaced
+    %li
+      .heading
+        %code
+          src
+        folder 
+      where you'll put all your custom
+      %a{ :href => "#mxml", :title => "What is MXML?" }
+        MXML
+      and
+      %a{ :href => "#as3", :title => "What is ActionScript 3?" }
+        AS3
+      files, organized (hopefully) into packages.
+    %li
+      .heading
+        %code
+          Flex
+        framework folder
+      which is usually just a dynamically linked version of Flex Framework 
+      %a{ :href => "#swc", :title => "What is a SWC?" }
+        SWCs
+      \.
+    %li
+      .heading
+        %code
+          bin-debug
+        folder        
+      where you'll find the debug (development) version of your compiled application after the first time it's built.
+    %li
+      .heading
+        %code
+          bin-release
+        folder        
+      where you'll find a much smaller release (production) version of your compiled application when you do a release-build from Flash Builder.
+    %li
+      .heading
+        %code
+          html-template
+        folder        
+      which contains any files you want to be included in your debug and release builds and thus interpreted and placed into the bin-debug
+      and bin-release folders, respectively. This includes the HTML page that you want to develop your application in by default and is pre-populated
+      by Flash Builder when you create a new Flex Project. Note that the 
+      %code
+        index.template.html
+      file gets turned into the
+      %code
+        [your_app_name].html
+      file in the
+      %code
+        bin-release
+      and
+      %code
+        bin-debug
+      folders, in this case
+      %code
+        EventPhasesApp.html
+      \.
+    %li
+      .heading
+        %code
+          libs
+        folder        
+      where you'll typically put any
+      %a{ :href => "#swc", :title => "What is a SWC?" }
+        SWC
+      files that containing extra classes and/or assets you want to use in your application.
+  %p
+    Don't forget to pick a testing framework like FlexUnit and add a 
+    %code
+      test
+    folder for your tests!
+  .clear
+  
+  
 %h3
   %a{ :name => "libraryproject" }
     What is a Flex Library Project?
+.definition
+  %img.right{ :src => "/images/library_project_example.png", :alt => "Flex Library Project Directory Structure" }    
+  A Flex Library Project is simply a collection of independent files and folders that you want to compile into a 
+  %a{ :href => "#swc", :title => "What is a SWC?" }
+    SWC
+  for use in other projects. Unlike regular
+  %a{ :href => "#project", :title => "What is a Flex Project?" }
+    Flex Projects
+  which only include classes that are actually used in the output SWF, by default Flex Library Projects will include
+  all classes in all its source folders into the compiled SWC.
+  The typical directory structure includes:
+  %ul.spaced
+    %li
+      .heading
+        %code
+          src
+        folder 
+      where you'll put all your custom
+      %a{ :href => "#mxml", :title => "What is MXML?" }
+        MXML
+      and
+      %a{ :href => "#as3", :title => "What is ActionScript 3?" }
+        AS3
+      files, organized (hopefully) into packages.
+    %li
+      .heading
+        %code
+          Flex
+        framework folder
+      which is usually just a dynamically linked version of Flex Framework 
+      %a{ :href => "#swc", :title => "What is a SWC?" }
+        SWCs
+      \.
+    %li
+      .heading
+        %code
+          bin
+        folder        
+      where the compiled SWC version of all your classes will output to by default.
+  .clear
+  
+  
 %h3
   %a{ :name => "app" }
     What is an Application?
+    
+    
 %h3
   %a{ :name => "layout" }
     What is a layout?
+
+
 %h3
   %a{ :name => "component" }
     What is a component?
+
+
 %h3
   %a{ :name => "container" }
     What is a container?
+
+
 %h3
   %a{ :name => "skin" }
     What is a skin?
-.definition
   
 %h3
   %a{ :name => "css" }
     What is a style and what is Flex CSS?
+
+
 %h3
   %a{ :name => "state" }
     What is a State?
@@ -345,6 +533,7 @@
     Note the &lt;s:states/&gt; block where the two States for the toolbar are defined, the use of the [property].[state] syntax on the properties of the BorderContainer
     and the includeIn/exludeFrom directives on the two buttons. Also note that the default state of the component is the first one you define.
     If you get this, you now know 95% of what you need to know about Flex States.
+  
   
 %h3
   %a{ :name => "transition" }
