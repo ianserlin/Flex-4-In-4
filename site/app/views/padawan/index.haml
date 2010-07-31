@@ -35,14 +35,14 @@
       %a{ :href => "#app" }
         What is an Application?
     %li
-      %a{ :href => "#layout" }
-        What is a layout?
-    %li
       %a{ :href => "#component" }
         What is a component?
     %li
       %a{ :href => "#container" }
         What is a container?
+    %li
+      %a{ :href => "#layout" }
+        What is a layout?
     %li
       %a{ :href => "#skin" }
         What is a skin?
@@ -175,7 +175,7 @@
         Like all good XML files, tags in MXML are namespaced - in particular the
         %code
           mx
-        namespace refers to Flex 3/Halo components and the
+        namespace refers to Flex 3/Halo components (which you should use as little as possible) and the
         %code
           s
         namespace refers to those classes that were introduced in Flex 4/Gumbo/Spark.
@@ -339,6 +339,8 @@
     %a{ :href => "#app", :title => "What is an Application?" }
       application 
     that you don't need to modify yourself. If your familiar with Java, SWCs are the equivalent of library jars.
+    
+    
 %h3
   %a{ :name => "swz" }
     What is a SWZ?
@@ -527,24 +529,89 @@
     %ul.spaced
       %li
         .title
-          Basic Layout (absolute positioning)
-        If you give a
-        %a{ :href => "#container", :title => "What is a container?" }
-          container
-        a basic layout, its child components specify their requested positions using the
-        %code
-          top, bottom, left, right, verticalCenter, horizontalCenter
-        and
-        %code
-          x
-        and
-        %code
-          y
-        properties as in the following example:
-        = partial 'padawan/basic_layout_example'
-        You can mix and match these properties in any combination you want to specify where your components will appear on screen.
-
-
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/layouts/BasicLayout.html?allClasses=1", :title => "Flex 4 BasicLayout API" }
+            Basic Layout 
+          (absolute positioning)
+        %p
+          If you give a
+          %a{ :href => "#container", :title => "What is a container?" }
+            container
+          a basic layout, its child components specify their requested positions using the
+          %code
+            top, bottom, left, right, verticalCenter, horizontalCenter
+          and
+          %code
+            x
+          and
+          %code
+            y
+          properties as in the following example:
+        %p
+          = partial 'padawan/basic_layout_example'
+        %p
+          You can mix and match these properties in any combination you want to specify where your components will appear on screen.
+      %li
+        .title
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/layouts/VerticalLayout.html?allClasses=1", :title => "Flex 4 VerticalLayout API" }
+            Vertical 
+          and 
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/layouts/HorizontalLayout.html?allClasses=1", :title => "Flex 4 HorizontalLayout API" }
+            Horizontal 
+          Layouts (relative positioning)
+        %p
+          The HorizontalLayout and VerticalLayout intuitively do what you think they do, simply arrange their child components in order
+          horizontally or vertically, but you can use the
+          %code
+            gap
+          (the number of pixels between successive components), 
+          %code
+            horizontalAlign
+          and
+          %code
+            verticalAlign
+          properties of these layouts to modify the way they do it (Lines 11-13 &amp; 34):
+        %p
+          = partial 'padawan/horizontal_and_vertical_layout_example'
+        %p
+          Note that the 
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/HGroup.html?allClasses=1", :title => "Flex 4 HGroup Container" }
+            HGroup
+          and
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/VGroup.html?allClasses=1", :title => "Flex 4 HGroup Container" }
+            VGroup
+          containers are simply shortcut ways of specifying a Group with a horizontal or vertical layout, respectively, and in that case
+          you simply specify the layout properties directly on the HGroup or VGroup itself.
+      %li
+        .title
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/layouts/TileLayout.html?allClasses=1", :title => "Flex 4 TileLayout API" }
+            Tile Layout
+        %p
+          TileLayout is used primarily with 
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/List.html?allClasses=1", :title => "Flex 4 List Component" }
+            List
+          and
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/DataGroup.html?allClasses=1", :title => "Flex 4 DataGroup Component" }
+            DataGroup
+          \-based components to organize the display of data-driven visual elements (like a list of orders) as opposed to buttons and controls. All classes that extend
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/layouts/supportClasses/LayoutBase.html", :title => "Flex 4 LayoutBase Component" }
+            LayoutBase
+          , however, are interchangeable, meaning you can use TileLayout outside of List controls as demonstrated by simply modifying the previous example:
+        %p
+          = partial 'padawan/tilelayout_example'
+        %p
+          The first thing you'll notice is that by default TileLayout sets the size of all the items it is laying out (its tiles) to be the same. 
+          Since TileLayouts arrange components both horizontally and vertically they expose a variety of different properties to give you finer
+          grained control on how the "tiles" are arranged without having to do all then fancy math yourself. You'll really need to read the
+          %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/layouts/TileLayout.html?allClasses=1", :title => "Flex 4 TileLayout API" }
+            documentation 
+          and play in order to get a true feel for what it's capable of though, in particular check out
+          %code
+            columnAlign, rowAlign, columnWidth, rowHeight, orientation
+          and
+          %code
+            orientation
+          \.
+        
 %h3
   %a{ :name => "skin" }
     What is a skin?
