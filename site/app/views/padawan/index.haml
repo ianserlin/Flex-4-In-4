@@ -35,11 +35,8 @@
       %a{ :href => "#app" }
         What is an Application?
     %li
-      %a{ :href => "#component" }
-        What is a component?
-    %li
-      %a{ :href => "#container" }
-        What is a container?
+      %a{ :href => "#componentcontainer" }
+        What is a component and what is container?
     %li
       %a{ :href => "#layout" }
         What is a layout?
@@ -248,7 +245,7 @@
         .heading
           Inline Declarations: Lines 26-29
         While you can add any visual component as a direct child of a
-        %a{ :href => "#container", :title => "What is a container?" }
+        %a{ :href => "#componentcontainer", :title => "What is a container?" }
           container
         (like Application, Group, Panel, etc.) in MXML, any
         %em
@@ -508,13 +505,50 @@
   %p
     
 %h3
-  %a{ :name => "component" }
-    What is a component?
-
-
-%h3
-  %a{ :name => "container" }
-    What is a container?
+  %a{ :name => "componentcontainer" }
+    What is a component and what is a container?
+.definition
+  %p
+    The line that separates containers and components is conceptual as well as practical. Built-in components are things like
+    Button, TextInput, RichEditableText, VideoPlayer, etc. and typically extend the
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/supportClasses/SkinnableComponent.html?allClasses=1", :title => "Flex 4 SkinnableComponent API" }
+      SkinnableComponent
+    class if they can be 
+    %a{ :href => "#skin", :title => "What is a skin?" }
+      skinned. 
+    Built-in containers are things like Application, Group, Panel, etc. and typically extend
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/SkinnableContainer.html?allClasses=1", :title => "Flex 4 SkinnableContainer API" }
+      SkinnableContainer
+    or 
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/SkinnableDataContainer.html?allClasses=1", :title => "Flex 4 SkinnableDataContainer API" }
+      SkinnableDataContainer
+    if they can be skinned.
+  %p
+    Conceptually though, a component is a class that may contain multiple sub-controls like a button and a text input, but is thought of and can
+    be used as if it is one single, cohesive control. This is in contrast to a container, which is designed with the express purpose of being able
+    to contain and layout a dynamic number of anonymous child controls. While a component might contain some logic to manipulate its sub-controls,
+    e.g. only enabling its button child when its text input child has text in it, a container should not care about what class any of its children
+    are and shouldn't normally contain any special logic to manipulate its children, it is simply a bucket to group visual elements together.
+  %p
+    The public properties and methods that a component exposes are highly dependent on the purpose of the control. Conversely, good container 
+    design by convention means exposing a 
+    %code
+      contentGroup
+    property that will be populated with the dynamic children the container is managing
+    and a
+    %code
+      layout
+    property that can take a
+    %a{ :href => "#layout", :title => "What is a layout?" }
+      Layout
+    instance that manages how its dynamic children are arranged on screen.
+  %p
+    Practically, in 
+    %a{ :href => "#mxml", :title => "What is MXML?" }
+      MXML
+    you can nest additional visual elements inside of a container but cannot nest any additional visual elements inside a component.
+    So, when you're designing your custom controls decide whether your new control should be thought of as one cohesive control or is 
+    designed to hold a variety of other controls and choose your base class appropriately.
 
 %h3
   %a{ :name => "layout" }
@@ -534,7 +568,7 @@
           (absolute positioning)
         %p
           If you give a
-          %a{ :href => "#container", :title => "What is a container?" }
+          %a{ :href => "#componentcontainer", :title => "What is a container?" }
             container
           a basic layout, its child components specify their requested positions using the
           %code
