@@ -486,13 +486,25 @@
 %h3
   %a{ :name => "app" }
     What is an Application?
+.definition
+  %p
+    All Flex 4 apps use the
+    %a{ :href => "http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/spark/components/Application.html?allClasses=1", :title => "Spark Application API" }
+      Spark Application
+    class as their entry point, like the
+    %code
+      main(...)
+    function in C++/Java. When you create a new
+    %a{ :href => "#project", :title => "What is a Flex Project?" }
+      Flex Project
+    a
+    %em
+      [YourAppName].mxml 
+    file is generated for you in the default package. This is where you will always add your first lines of code that kick off
+    the rest of your app or wire in things like preloaders. The Flash Builder generated Application class looks like this:
+    = partial 'padawan/blank_application_example'
+  %p
     
-    
-%h3
-  %a{ :name => "layout" }
-    What is a layout?
-
-
 %h3
   %a{ :name => "component" }
     What is a component?
@@ -501,6 +513,36 @@
 %h3
   %a{ :name => "container" }
     What is a container?
+
+%h3
+  %a{ :name => "layout" }
+    What is a layout?
+.definition
+  %p
+    Layouts are an awesome new addition in Flex 4 and they let you further separate the code that defines what components
+    are part of your application with the code that positions those components on the screen. This means you can define your
+    own custom way for arranging components and easily test it and reuse it many times without having to duplicate code.
+  %p
+    Flex 4 ships with a few of the most common types of layouts you'll want to use built-in, namely:
+    %ul.spaced
+      %li
+        .title
+          Basic Layout (absolute positioning)
+        If you give a
+        %a{ :href => "#container", :title => "What is a container?" }
+          container
+        a basic layout, its child components specify their requested positions using the
+        %code
+          top, bottom, left, right, verticalCenter, horizontalCenter
+        and
+        %code
+          x
+        and
+        %code
+          y
+        properties as in the following example:
+        = partial 'padawan/basic_layout_example'
+        You can mix and match these properties in any combination you want to specify where your components will appear on screen.
 
 
 %h3

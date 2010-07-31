@@ -1,0 +1,56 @@
+<script type="syntaxhighlighter" class="brush: mxml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	
+	<s:Button label="I'm in the default position, the top left corner of my parent container."/>
+	
+	<s:Label text="I'm centered vertically and horizontally within my parent container."
+			 horizontalCenter="0"
+			 verticalCenter="0"/>
+	
+	<s:TextArea text="I'm 10 pixels away from the top, bottom and right edges of my parent container."
+				top="10"
+				right="10"
+				bottom="10"
+				width="100"/>
+	
+	<s:TextInput text="I'm positioned absoluting using x,y coordinates within my parent container."
+				 width="400"
+				 x="30" y="200"/>
+	
+</s:Application>
+
+</script>
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="650" height="300" id="BindingsAS3">
+    <param name="movie" value="/swfs/BasicLayout.swf" />
+    <param name="quality" value="high" />
+    <param name="bgcolor" value="#ffffff" />
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name="allowFullScreen" value="false" />
+    <!--[if !IE]>-->
+    <object type="application/x-shockwave-flash" data="/swfs/BasicLayout.swf" width="650" height="300">
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="false" />
+    <!--<![endif]-->
+    <!--[if gte IE 6]>-->
+    	<p> 
+    		Either scripts and active content are not permitted to run or Adobe Flash Player version
+    		10.0.0 or greater is not installed.
+    	</p>
+    <!--<![endif]-->
+        <a href="http://www.adobe.com/go/getflashplayer">
+            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+        </a>
+    <!--[if !IE]>-->
+    </object>
+    <!--<![endif]-->
+</object>
