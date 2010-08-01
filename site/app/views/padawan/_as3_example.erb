@@ -1,0 +1,154 @@
+<script type="syntaxhighlighter" class="brush: as3"><![CDATA[
+/**
+ * It's always good practice organize your classes into packages
+ * for maintainability and reuse. 
+ */
+package com.flex4in4.models {
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
+	
+	[Event(name="gotKarmaPoints",type="flash.events.Event")]
+	[Event(name="lostKarmaPoints",type="flash.events.Event")]
+	
+	/**
+	 * The IanBot class is a rough approximation of the author.
+	 * 
+	 * @author Ian Serlin
+	 */	
+	public class IanBot extends EventDispatcher {
+		
+		// =========== RUN ON FIRST LOAD ===========
+		
+		trace( "IanBot class loaded into memory" );
+		
+		// =========== PUBLIC CLASS PROPERTIES ===========
+		
+		// constants
+		public static const ENGLISH:String 				= "english";
+		public static const CHINESE:String 				= "chinese";
+		public static const SPANISH:String 				= "spanish";
+		public static const GOT_KARMA_POINTS:String 	= "gotKarmaPoints";
+		public static const LOST_KARMA_POINTS:String 	= "lostKarmaPoints";
+		
+		public static const NAME:String = "Ian Bot";
+		
+		public static var numberOfIanBots:uint;
+		
+		// =========== PUBLIC INSTANCE PROPERTIES ===========
+
+		// string block syntax
+		public var bio:String = (<![CDATA[
+									I like bike rides,
+									talking about new ideas,
+									writing software,
+									cooking, exercising,
+									reading, Gordon Ramsay
+									and China, not necessarily in that order.
+								 ]]>).toString();
+		
+		[Bindable]
+		public var eyeColor:String = "green";
+		
+		[Bindable]
+		// getter
+		public function get isBusy():Boolean {
+			return _isBusy;
+		}
+		// setter
+		public function set isBusy( value:Boolean ):void {
+			if( new Date().getDay() >= 5 /* Friday, Saturday */ && !_isBusy ){
+				_isBusy = true;
+			}else{
+				_isBusy = value;
+			}
+		}
+		// storage variable
+		protected var _isBusy:Boolean = false;
+		
+		// public, read-only getter
+		public function get gender():String {
+			return _gender;
+		}
+		// storage variable
+		protected var _gender:String = "male";
+		
+		// =========== PROTECTED INSTANCE PROPERTIES ===========
+		
+		protected var _conscious:IanBotConscious = new IanBotConscious();
+		
+		// =========== CONSTRUCTOR ===========
+		/**
+		 * Constructor: invoked by calling "new IanBot()" 
+		 */		
+		public function IanBot() {
+			super();
+			trace( "new IanBot constructed" );
+			IanBot.numberOfIanBots++;
+			trace( "total number of IanBots: " + IanBot.numberOfIanBots );
+		}
+		
+		// =========== PUBLIC CLASS METHODS ===========
+		
+		public static function createFemaleIanBot():IanBot {
+			var ianBot:IanBot = new IanBot();
+			ianBot._gender = "female";
+			return ianBot;
+		}
+		
+		// =========== PUBLIC INSTANCE METHODS ===========
+		
+		public function speak( language:String="english" ):String {
+			var response:String;
+			switch( language ){
+				case CHINESE:
+					response = speakChinese();
+					break;
+				case SPANISH:
+					response = "Me encanta el queso.";
+					break;
+				default:
+					response = "Give to me the monies."; 
+					break;
+			}
+			return response;
+		}
+		
+		// =========== PROTECTED INSTANCE METHODS ===========
+		
+		protected function speakChinese():String {
+			return "在世界上 我最喜欢的地方是香港!";
+		}
+		
+		// =========== PRIVATE INSTANCE METHODS ===========
+		
+		private function resolveMoralDilemma():void {
+			try{
+				if( _conscious.isItTheRightThingToDo() ){
+					dispatchEvent( new Event( GOT_KARMA_POINTS ) );
+				}else{
+					dispatchEvent( new Event( LOST_KARMA_POINTS ) );
+				}
+			}catch( e:Error ){
+				trace( "IanBot missing conscious: " + e.message );
+				dispatchEvent( new Event( LOST_KARMA_POINTS ) );
+			}
+		}
+		
+		// =========== INTERNAL INSTANCE METHODS ===========
+		
+		internal function experienceGuiltTrip():void {
+			trace( "boohoos" );
+		}
+	}
+}
+
+/**
+ * This private class is *only* visible to the other code in this one file. 
+ */
+class IanBotConscious {
+	
+	public function isItTheRightThingToDo():Boolean {
+		return Math.random() >= 0.5;
+	}
+}
+</script>
